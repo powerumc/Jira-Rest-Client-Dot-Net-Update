@@ -1,0 +1,21 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="JiraVersion.cs" company="David Bevin">
+//     Copyright (c) David Bevin.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+
+namespace JIRC.Domain
+{
+    public class JiraVersion
+    {
+        public bool Archived { get; set; }
+        public string Description { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public bool Released { get; set; }
+        public Uri Self { get; set; }
+    }
+}
