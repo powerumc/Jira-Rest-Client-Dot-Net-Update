@@ -22,8 +22,6 @@ namespace JIRC.Clients
 
         private const string IssuesUriPrefix = "issue";
 
-        private static readonly IssueJsonParser IssueParser = new IssueJsonParser();
-
         private readonly JsonServiceClient client;
 
         public JiraIssueRestClient(JsonServiceClient client)
@@ -50,7 +48,7 @@ namespace JIRC.Clients
         public Issue GetIssue(string key)
         {
             var json = client.Get<JsonObject>("/{0}/{1}".Fmt(IssuesUriPrefix, key));
-            return IssueParser.Parse(json);
+            return IssueJsonParser.Parse(json);
         }
     }
 }

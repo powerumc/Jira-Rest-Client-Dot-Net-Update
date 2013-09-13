@@ -16,7 +16,7 @@ namespace JIRC.Internal.Json
 {
     internal class IssueJsonParser
     {
-        public Issue Parse(JsonObject json)
+        public static Issue Parse(JsonObject json)
         {
             var issue = new Issue { Id = json.Get<int>(Keys.Id), Key = json.Get<string>(Keys.Key), Self = json.Get<Uri>(Keys.Self) };
             var fields = json.Get<JsonObject>(Keys.Fields);
@@ -52,7 +52,7 @@ namespace JIRC.Internal.Json
 
             public const string Description = "description";
 
-            public const string FixVersions = "fixversions";
+            public const string FixVersions = "fixVersions";
 
             public const string Project = "project";
 

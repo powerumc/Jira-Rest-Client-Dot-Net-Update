@@ -14,6 +14,8 @@ namespace JIRC
 
         IProjectRestClient ProjectClient { get; }
 
+        ISearchRestClient SearchClient { get; }
+
         void ClearSession();
 
         SessionInfo Login();
