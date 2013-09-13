@@ -16,25 +16,11 @@ namespace JIRC.Domain
         public IEnumerable<IssueType> IssueTypes { get; set; }
 
         public BasicUser Lead { get; set; }
-        public Dictionary<string, Uri> Roles { get; set; }
 
         public Uri Url { get; set; }
 
         public IEnumerable<JiraVersion> Versions { get; set; }
 
-        /*
-        public IEnumerable<BasicProjectRole> ProjectRoles
-        {
-            get
-            {
-                if (Roles == null)
-                {
-                    return null;
-                }
-
-                return Roles.Select(a => new BasicProjectRole { Name = a.Key, Self = a.Value });
-            }
-        }
-         */
+        public IEnumerable<BasicProjectRole> Roles { get; set; }
     }
 }

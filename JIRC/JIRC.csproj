@@ -69,6 +69,8 @@
     <Compile Include="Domain\IssueType.cs" />
     <Compile Include="Domain\JiraVersion.cs" />
     <Compile Include="Domain\Project.cs" />
+    <Compile Include="Domain\ProjectRole.cs" />
+    <Compile Include="Domain\RoleActor.cs" />
     <Compile Include="Domain\SearchResult.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
@@ -76,7 +78,10 @@
     <Compile Include="IJiraRestClient.cs" />
     <Compile Include="IJiraRestClientFactory.cs" />
     <Compile Include="Internal\CommentPost.cs" />
+    <Compile Include="Internal\Json\BasicProjectJsonParser.cs" />
     <Compile Include="Internal\Json\IssueJsonParser.cs" />
+    <Compile Include="Internal\Json\ProjectJsonParser.cs" />
+    <Compile Include="Internal\Json\ProjectRoleJsonParser.cs" />
     <Compile Include="Internal\Json\SearchResultParser.cs" />
     <Compile Include="Internal\SessionPost.cs" />
     <Compile Include="IProjectRestClient.cs" />
