@@ -31,6 +31,10 @@ namespace JIRC.Domain
 
         public User Reporter { get; set; }
         public string Summary { get; set; }
-        public Uri TransitionsUri { get; set; }
+        public Uri TransitionsUri { get; internal set; }
+
+        public BasicWatchers Watchers { get; set; }
+
+        public BasicVotes Votes { get; set; }
     }
 }

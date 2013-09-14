@@ -39,6 +39,8 @@ namespace JIRC.Internal.Json
 
                 issue.FixVersions = fields.Get<IEnumerable<JiraVersion>>(FieldKeys.FixVersions);
                 issue.AffectedVersions = fields.Get<IEnumerable<JiraVersion>>(FieldKeys.AffectedVersions);
+                issue.Watchers = fields.Get<BasicWatchers>("watches");
+                issue.Votes = fields.Get<BasicVotes>("votes");
             }
 
             return issue;

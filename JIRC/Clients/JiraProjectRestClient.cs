@@ -63,6 +63,8 @@ namespace JIRC.Clients
                 Name = x.Key,
                 Self = x.Value
             });
+
+            // TODO: Go and fetch the full Project Role for each role (this method should return IEnumerable<ProjectRole>)
         }
     }
 }

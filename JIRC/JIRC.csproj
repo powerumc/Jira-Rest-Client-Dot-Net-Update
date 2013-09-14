@@ -63,8 +63,13 @@
     <Compile Include="Domain\BasicIssueType.cs" />
     <Compile Include="Domain\BasicProjectRole.cs" />
     <Compile Include="Domain\BasicUser.cs" />
+    <Compile Include="Domain\BasicVotes.cs" />
+    <Compile Include="Domain\BasicWatchers.cs" />
     <Compile Include="Domain\Comment.cs" />
+    <Compile Include="Domain\Field.cs" />
+    <Compile Include="Domain\FieldSchema.cs" />
     <Compile Include="Domain\Filter.cs" />
+    <Compile Include="Domain\Input\FieldInput.cs" />
     <Compile Include="Domain\Issue.cs" />
     <Compile Include="Domain\IssueType.cs" />
     <Compile Include="Domain\JiraVersion.cs" />
@@ -72,7 +77,11 @@
     <Compile Include="Domain\ProjectRole.cs" />
     <Compile Include="Domain\RoleActor.cs" />
     <Compile Include="Domain\SearchResult.cs" />
+    <Compile Include="Domain\Transition.cs" />
+    <Compile Include="Domain\Input\TransitionInput.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Votes.cs" />
+    <Compile Include="Domain\Watchers.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="IIssueRestClient.cs" />
     <Compile Include="IJiraRestClient.cs" />
@@ -83,6 +92,8 @@
     <Compile Include="Internal\Json\ProjectJsonParser.cs" />
     <Compile Include="Internal\Json\ProjectRoleJsonParser.cs" />
     <Compile Include="Internal\Json\SearchResultParser.cs" />
+    <Compile Include="Internal\Json\TransitionJsonParser.cs" />
+    <Compile Include="Internal\Json\WatchersJsonParser.cs" />
     <Compile Include="Internal\SessionPost.cs" />
     <Compile Include="IProjectRestClient.cs" />
     <Compile Include="Clients\JiraRestClient.cs" />
