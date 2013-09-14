@@ -37,10 +37,11 @@ namespace JIRC.Clients
             this.pass = pass;
 
             IssueClient = new JiraIssueRestClient(client);
+            UserClient = new JiraUserRestClient(client);
             ProjectClient = new JiraProjectRestClient(client);
+            ComponentClient = new JiraComponentRestClient(client);
             SearchClient = new JiraSearchRestClient(client);
             MetadataClient = new JiraMetadataRestClient(client);
-            UserClient = new JiraUserRestClient(client);
         }
 
         public IIssueRestClient IssueClient { get; private set; }
@@ -48,6 +49,8 @@ namespace JIRC.Clients
         public IUserRestClient UserClient { get; private set; }
 
         public IProjectRestClient ProjectClient { get; private set; }
+
+        public IComponentRestClient ComponentClient { get; private set; }
 
         public ISearchRestClient SearchClient { get; private set; }
 

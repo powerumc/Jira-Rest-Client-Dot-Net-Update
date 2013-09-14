@@ -53,12 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\JiraComponentRestClient.cs" />
     <Compile Include="Clients\JiraIssueRestClient.cs" />
     <Compile Include="Clients\JiraMetadataRestClient.cs" />
     <Compile Include="Clients\JiraProjectRestClient.cs" />
     <Compile Include="Clients\JiraSearchRestClient.cs" />
     <Compile Include="Clients\JiraUserRestClient.cs" />
     <Compile Include="Domain\AddressableNamedEntity.cs" />
+    <Compile Include="Domain\AssigneeInfo.cs" />
+    <Compile Include="Domain\AssigneeType.cs" />
     <Compile Include="Domain\AvatarUrl.cs" />
     <Compile Include="Domain\BasicComponent.cs" />
     <Compile Include="Domain\BasicIssue.cs" />
@@ -71,9 +74,11 @@
     <Compile Include="Domain\BasicVotes.cs" />
     <Compile Include="Domain\BasicWatchers.cs" />
     <Compile Include="Domain\Comment.cs" />
+    <Compile Include="Domain\Component.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\FieldSchema.cs" />
     <Compile Include="Domain\Filter.cs" />
+    <Compile Include="Domain\Input\ComponentInput.cs" />
     <Compile Include="Domain\Input\FieldInput.cs" />
     <Compile Include="Domain\Issue.cs" />
     <Compile Include="Domain\IssueLinksType.cs" />
@@ -94,12 +99,14 @@
     <Compile Include="Domain\Votes.cs" />
     <Compile Include="Domain\Watchers.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="IComponentRestClient.cs" />
     <Compile Include="IIssueRestClient.cs" />
     <Compile Include="IJiraRestClient.cs" />
     <Compile Include="IJiraRestClientFactory.cs" />
     <Compile Include="IMetadataRestClient.cs" />
     <Compile Include="Internal\CommentPost.cs" />
     <Compile Include="Internal\Json\BasicProjectJsonParser.cs" />
+    <Compile Include="Internal\Json\ComponentJsonParser.cs" />
     <Compile Include="Internal\Json\FieldJsonParser.cs" />
     <Compile Include="Internal\Json\IssueJsonParser.cs" />
     <Compile Include="Internal\Json\IssueLinkTypesJsonParser.cs" />

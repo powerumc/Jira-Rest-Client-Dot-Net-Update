@@ -16,6 +16,8 @@ namespace JIRC
 
         IProjectRestClient ProjectClient { get; }
 
+        IComponentRestClient ComponentClient { get; }
+
         ISearchRestClient SearchClient { get; }
 
         IMetadataRestClient MetadataClient { get; }
