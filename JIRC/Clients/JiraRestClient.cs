@@ -40,9 +40,12 @@ namespace JIRC.Clients
             ProjectClient = new JiraProjectRestClient(client);
             SearchClient = new JiraSearchRestClient(client);
             MetadataClient = new JiraMetadataRestClient(client);
+            UserClient = new JiraUserRestClient(client);
         }
 
         public IIssueRestClient IssueClient { get; private set; }
+
+        public IUserRestClient UserClient { get; private set; }
 
         public IProjectRestClient ProjectClient { get; private set; }
 

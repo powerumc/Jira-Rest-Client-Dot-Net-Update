@@ -12,6 +12,8 @@ namespace JIRC
     {
         IIssueRestClient IssueClient { get; }
 
+        IUserRestClient UserClient { get; }
+
         IProjectRestClient ProjectClient { get; }
 
         ISearchRestClient SearchClient { get; }
