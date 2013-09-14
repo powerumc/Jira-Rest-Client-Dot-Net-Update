@@ -12,6 +12,6 @@ namespace JIRC.Domain
     {
         public string Description { get; set; }
 
-        public Uri IconUri { get; set; }
+        public Uri IconUrl { get; set; }
     }
 }

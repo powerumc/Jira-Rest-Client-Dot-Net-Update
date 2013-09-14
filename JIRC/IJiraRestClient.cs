@@ -16,6 +16,8 @@ namespace JIRC
 
         ISearchRestClient SearchClient { get; }
 
+        IMetadataRestClient MetadataClient { get; }
+
         void ClearSession();
 
         SessionInfo Login();

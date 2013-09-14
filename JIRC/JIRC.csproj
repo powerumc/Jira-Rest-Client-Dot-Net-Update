@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients\JiraIssueRestClient.cs" />
+    <Compile Include="Clients\JiraMetadataRestClient.cs" />
     <Compile Include="Clients\JiraProjectRestClient.cs" />
     <Compile Include="Clients\JiraSearchRestClient.cs" />
     <Compile Include="Domain\AddressableNamedEntity.cs" />
@@ -61,7 +62,10 @@
     <Compile Include="Domain\BasicComponent.cs" />
     <Compile Include="Domain\BasicIssue.cs" />
     <Compile Include="Domain\BasicIssueType.cs" />
+    <Compile Include="Domain\BasicPriority.cs" />
     <Compile Include="Domain\BasicProjectRole.cs" />
+    <Compile Include="Domain\BasicResolution.cs" />
+    <Compile Include="Domain\BasicStatus.cs" />
     <Compile Include="Domain\BasicUser.cs" />
     <Compile Include="Domain\BasicVotes.cs" />
     <Compile Include="Domain\BasicWatchers.cs" />
@@ -71,12 +75,18 @@
     <Compile Include="Domain\Filter.cs" />
     <Compile Include="Domain\Input\FieldInput.cs" />
     <Compile Include="Domain\Issue.cs" />
+    <Compile Include="Domain\IssueLinksType.cs" />
+    <Compile Include="Domain\IssueLinkType.cs" />
     <Compile Include="Domain\IssueType.cs" />
     <Compile Include="Domain\JiraVersion.cs" />
+    <Compile Include="Domain\Priority.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\ProjectRole.cs" />
+    <Compile Include="Domain\Resolution.cs" />
     <Compile Include="Domain\RoleActor.cs" />
     <Compile Include="Domain\SearchResult.cs" />
+    <Compile Include="Domain\ServerInfo.cs" />
+    <Compile Include="Domain\Status.cs" />
     <Compile Include="Domain\Transition.cs" />
     <Compile Include="Domain\Input\TransitionInput.cs" />
     <Compile Include="Domain\User.cs" />
@@ -86,9 +96,12 @@
     <Compile Include="IIssueRestClient.cs" />
     <Compile Include="IJiraRestClient.cs" />
     <Compile Include="IJiraRestClientFactory.cs" />
+    <Compile Include="IMetadataRestClient.cs" />
     <Compile Include="Internal\CommentPost.cs" />
     <Compile Include="Internal\Json\BasicProjectJsonParser.cs" />
+    <Compile Include="Internal\Json\FieldJsonParser.cs" />
     <Compile Include="Internal\Json\IssueJsonParser.cs" />
+    <Compile Include="Internal\Json\IssueLinkTypesJsonParser.cs" />
     <Compile Include="Internal\Json\ProjectJsonParser.cs" />
     <Compile Include="Internal\Json\ProjectRoleJsonParser.cs" />
     <Compile Include="Internal\Json\SearchResultParser.cs" />
@@ -106,7 +119,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
