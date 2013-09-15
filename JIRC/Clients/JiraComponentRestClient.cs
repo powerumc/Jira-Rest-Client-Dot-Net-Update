@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using JIRC.Domain;
 using JIRC.Domain.Input;
 using JIRC.Extensions;
 using JIRC.Internal.Json;
+using JIRC.Internal.Json.Gen;
 
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.Text;
@@ -33,22 +31,34 @@ namespace JIRC.Clients
 
         public Component CreateComponent(string projectKey, ComponentInput componentInput)
         {
-            throw new NotImplementedException();
+            var helper = new ComponentInputWithProjectKey(projectKey, componentInput);
+            var json = ComponentInputWithProjectKeyJsonGenerator.Generate(helper);
+            var response = client.Post<JsonObject>(baseComponentUri.ToString(), json);
+            return ComponentJsonParser.Parse(response);
         }
 
         public Component UpdateComponent(Uri componentUri, ComponentInput componentInput)
         {
-            throw new NotImplementedException();
+            var helper = new ComponentInputWithProjectKey(null, componentInput);
+            var json = ComponentInputWithProjectKeyJsonGenerator.Generate(helper);
+            var response = client.Put<JsonObject>(componentUri.ToString(), json);
+            return ComponentJsonParser.Parse(response);
         }
 
         public void RemoveComponent(Uri componentUri)
         {
-            throw new NotImplementedException();
+            RemoveComponent(componentUri, null);
         }
 
         public void RemoveComponent(Uri componentUri, Uri moveIssueToComponentUri)
         {
-            throw new NotImplementedException();
+            var qb = new UriBuilder(componentUri);
+            if (moveIssueToComponentUri != null)
+            {
+                qb.AppendQuery("moveIssuesTo", moveIssueToComponentUri.ToString());
+            }
+
+            client.Delete<JsonObject>(qb.Uri.ToString());
         }
 
         public int GetComponentRelatedIssuesCount(Uri componentUri)
