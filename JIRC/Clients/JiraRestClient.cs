@@ -40,8 +40,9 @@ namespace JIRC.Clients
             UserClient = new JiraUserRestClient(client);
             ProjectClient = new JiraProjectRestClient(client);
             ComponentClient = new JiraComponentRestClient(client);
-            SearchClient = new JiraSearchRestClient(client);
             MetadataClient = new JiraMetadataRestClient(client);
+            SearchClient = new JiraSearchRestClient(client);
+            ProjectRolesClient = new JiraProjectRolesRestClient(client);
         }
 
         public IIssueRestClient IssueClient { get; private set; }
@@ -52,9 +53,11 @@ namespace JIRC.Clients
 
         public IComponentRestClient ComponentClient { get; private set; }
 
+        public IMetadataRestClient MetadataClient { get; private set; }
+
         public ISearchRestClient SearchClient { get; private set; }
 
-        public IMetadataRestClient MetadataClient { get; private set; }
+        public IProjectRolesRestClient ProjectRolesClient { get; private set; }
 
         public void ClearSession()
         {

@@ -16,11 +16,5 @@ namespace JIRC
         IEnumerable<BasicProject> GetAllProjects();
 
         Project GetProject(string key);
-
-        ProjectRole GetRole(Uri uri);
-
-        ProjectRole GetRole(Uri projectUri, int roleId);
-
-        IEnumerable<BasicProjectRole> GetRoles(Uri projectUri);
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Clients\JiraIssueRestClient.cs" />
     <Compile Include="Clients\JiraMetadataRestClient.cs" />
     <Compile Include="Clients\JiraProjectRestClient.cs" />
+    <Compile Include="Clients\JiraProjectRolesRestClient.cs" />
     <Compile Include="Clients\JiraSearchRestClient.cs" />
     <Compile Include="Clients\JiraUserRestClient.cs" />
     <Compile Include="Domain\AddressableNamedEntity.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="IProjectRestClient.cs" />
     <Compile Include="Clients\JiraRestClient.cs" />
     <Compile Include="Domain\BasicProject.cs" />
+    <Compile Include="IProjectRolesRestClient.cs" />
     <Compile Include="ISearchRestClient.cs" />
     <Compile Include="IUserRestClient.cs" />
     <Compile Include="JiraRestClientFactory.cs" />
