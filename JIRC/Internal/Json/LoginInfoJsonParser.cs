@@ -14,8 +14,8 @@ namespace JIRC.Internal.Json
             {
                 FailedLoginCount = json.Get<int>("failedLoginCount"),
                 LoginCount = json.Get<int>("loginCount"),
-                LastFailedLoginDate = json.Get<DateTime>("lastFailedLoginTime"),
-                PreviousLoginDate = json.Get<DateTime>("previousLoginTime")
+                LastFailedLoginDate = json.Get<DateTimeOffset>("lastFailedLoginTime"),
+                PreviousLoginDate = json.Get<DateTimeOffset>("previousLoginTime")
             };
         }
     }

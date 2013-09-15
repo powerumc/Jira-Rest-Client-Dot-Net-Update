@@ -10,7 +10,7 @@ namespace JIRC.Domain.Input
 
         public string Description { get; set; }
 
-        public DateTime? ReleaseDate { get; set; }
+        public DateTimeOffset? ReleaseDate { get; set; }
 
         public bool Archived { get; set; }
 

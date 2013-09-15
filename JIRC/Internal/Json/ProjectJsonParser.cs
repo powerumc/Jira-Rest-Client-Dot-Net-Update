@@ -30,7 +30,7 @@ namespace JIRC.Internal.Json
                     Self = x.Get<Uri>("self"),
                     Archived = x.Get<bool>("archived"),
                     Released = x.Get<bool>("released"),
-                    ReleaseDate = x.Get<DateTime>("releasedate")
+                    ReleaseDate = x.Get<DateTimeOffset>("releasedate")
                 }),
 
                 Components = json.ArrayObjects("components").ConvertAll(x => new BasicComponent

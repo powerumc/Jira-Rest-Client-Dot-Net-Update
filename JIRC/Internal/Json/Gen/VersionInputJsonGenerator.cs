@@ -26,7 +26,7 @@ namespace JIRC.Internal.Json.Gen
 
             if (versionInput.ReleaseDate != null)
             {
-                var dt = (DateTime)versionInput.ReleaseDate;
+                var dt = (DateTimeOffset)versionInput.ReleaseDate;
                 json.Add("releaseDate", dt.ToString("o", CultureInfo.InvariantCulture));
             }
 

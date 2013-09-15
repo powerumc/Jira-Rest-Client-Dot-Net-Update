@@ -10,9 +10,9 @@ namespace JIRC.Domain
 
         public int BuildNumber { get; set; }
 
-        public DateTime BuildDate { get; set; }
+        public DateTimeOffset BuildDate { get; set; }
 
-        public DateTime ServerTime { get; set; }
+        public DateTimeOffset? ServerTime { get; set; }
 
         public string ScmInfo { get; set; }
 

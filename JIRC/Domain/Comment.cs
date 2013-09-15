@@ -12,14 +12,14 @@ namespace JIRC.Domain
     {
         public BasicUser Author { get; set; }
         public string Body { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTimeOffset CreationDate { get; set; }
         public int? Id { get; set; }
 
         public Uri Self { get; set; }
 
         public BasicUser UpdateAuthor { get; set; }
 
-        public DateTime UpdateDate { get; set; }
+        public DateTimeOffset UpdateDate { get; set; }
 
         public static Comment Create(string body)
         {

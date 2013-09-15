@@ -8,8 +8,8 @@ namespace JIRC.Domain
 
         public int LoginCount { get; set; }
 
-        public DateTime? LastFailedLoginDate { get; set; }
+        public DateTimeOffset? LastFailedLoginDate { get; set; }
 
-        public DateTime? PreviousLoginDate { get; set; }
+        public DateTimeOffset? PreviousLoginDate { get; set; }
     }
 }
