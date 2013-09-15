@@ -10,6 +10,7 @@ using JIRC.Domain;
 using JIRC.Internal;
 
 using ServiceStack.ServiceClient.Web;
+using ServiceStack.Text;
 
 namespace JIRC.Clients
 {
@@ -36,7 +37,10 @@ namespace JIRC.Clients
             this.user = user;
             this.pass = pass;
 
+            JsConfig.DateHandler = JsonDateHandler.ISO8601;
+
             IssueClient = new JiraIssueRestClient(client);
+            SessionClient = new JiraSessionRestClient(client, serverUri);
             UserClient = new JiraUserRestClient(client);
             ProjectClient = new JiraProjectRestClient(client);
             ComponentClient = new JiraComponentRestClient(client);
@@ -47,6 +51,8 @@ namespace JIRC.Clients
         }
 
         public IIssueRestClient IssueClient { get; private set; }
+
+        public ISessionRestClient SessionClient { get; private set; }
 
         public IUserRestClient UserClient { get; private set; }
 

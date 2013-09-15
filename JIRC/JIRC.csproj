@@ -59,6 +59,7 @@
     <Compile Include="Clients\JiraProjectRestClient.cs" />
     <Compile Include="Clients\JiraProjectRolesRestClient.cs" />
     <Compile Include="Clients\JiraSearchRestClient.cs" />
+    <Compile Include="Clients\JiraSessionRestClient.cs" />
     <Compile Include="Clients\JiraUserRestClient.cs" />
     <Compile Include="Clients\JiraVersionRestClient.cs" />
     <Compile Include="Domain\AddressableNamedEntity.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Domain\IssueLinkType.cs" />
     <Compile Include="Domain\IssueType.cs" />
     <Compile Include="Domain\JiraVersion.cs" />
+    <Compile Include="Domain\LoginInfo.cs" />
     <Compile Include="Domain\Priority.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\ProjectRole.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Domain\RoleActor.cs" />
     <Compile Include="Domain\SearchResult.cs" />
     <Compile Include="Domain\ServerInfo.cs" />
+    <Compile Include="Domain\Session.cs" />
     <Compile Include="Domain\Status.cs" />
     <Compile Include="Domain\Transition.cs" />
     <Compile Include="Domain\Input\TransitionInput.cs" />
@@ -119,9 +122,11 @@
     <Compile Include="Internal\Json\Gen\VersionPositionInputGenerator.cs" />
     <Compile Include="Internal\Json\IssueJsonParser.cs" />
     <Compile Include="Internal\Json\IssueLinkTypesJsonParser.cs" />
+    <Compile Include="Internal\Json\LoginInfoJsonParser.cs" />
     <Compile Include="Internal\Json\ProjectJsonParser.cs" />
     <Compile Include="Internal\Json\ProjectRoleJsonParser.cs" />
     <Compile Include="Internal\Json\SearchResultParser.cs" />
+    <Compile Include="Internal\Json\SessionJsonParser.cs" />
     <Compile Include="Internal\Json\TransitionJsonParser.cs" />
     <Compile Include="Internal\Json\VersionRelatedIssuesCountJsonParser.cs" />
     <Compile Include="Internal\Json\WatchersJsonParser.cs" />
@@ -131,6 +136,7 @@
     <Compile Include="Domain\BasicProject.cs" />
     <Compile Include="IProjectRolesRestClient.cs" />
     <Compile Include="ISearchRestClient.cs" />
+    <Compile Include="ISessionRestClient.cs" />
     <Compile Include="IUserRestClient.cs" />
     <Compile Include="IVersionRestClient.cs" />
     <Compile Include="JiraRestClientFactory.cs" />

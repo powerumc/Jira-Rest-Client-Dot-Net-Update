@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 
 using JIRC.Domain;
@@ -74,7 +73,6 @@ namespace JIRC.Clients
 
         public ServerInfo GetServerInfo()
         {
-            JsConfig.DateHandler = JsonDateHandler.ISO8601;
             return client.Get<ServerInfo>(ServerInfoResource);
         }
 
