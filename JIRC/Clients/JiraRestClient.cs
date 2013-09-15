@@ -42,6 +42,7 @@ namespace JIRC.Clients
             ComponentClient = new JiraComponentRestClient(client);
             MetadataClient = new JiraMetadataRestClient(client);
             SearchClient = new JiraSearchRestClient(client);
+            VersionClient = new JiraVersionRestClient(client);
             ProjectRolesClient = new JiraProjectRolesRestClient(client);
         }
 
@@ -56,6 +57,8 @@ namespace JIRC.Clients
         public IMetadataRestClient MetadataClient { get; private set; }
 
         public ISearchRestClient SearchClient { get; private set; }
+
+        public IVersionRestClient VersionClient { get; private set; }
 
         public IProjectRolesRestClient ProjectRolesClient { get; private set; }
 

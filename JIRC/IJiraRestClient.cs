@@ -18,9 +18,13 @@ namespace JIRC
 
         IComponentRestClient ComponentClient { get; }
 
+        IMetadataRestClient MetadataClient { get; }
+
         ISearchRestClient SearchClient { get; }
 
-        IMetadataRestClient MetadataClient { get; }
+        IVersionRestClient VersionClient { get; }
+
+        IProjectRolesRestClient ProjectRolesClient { get; }
 
         void ClearSession();
 
