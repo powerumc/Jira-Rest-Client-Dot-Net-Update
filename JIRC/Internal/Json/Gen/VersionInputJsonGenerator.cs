@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 using JIRC.Domain.Input;
 using JIRC.Extensions;

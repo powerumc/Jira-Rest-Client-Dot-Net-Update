@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using JIRC.Domain;
+﻿using JIRC.Domain;
 
 using ServiceStack.Text;
 
