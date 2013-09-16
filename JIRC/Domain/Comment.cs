@@ -11,8 +11,11 @@ namespace JIRC.Domain
     public class Comment
     {
         public BasicUser Author { get; set; }
+
         public string Body { get; set; }
+
         public DateTimeOffset CreationDate { get; set; }
+
         public int? Id { get; set; }
 
         public Uri Self { get; set; }
@@ -20,6 +23,8 @@ namespace JIRC.Domain
         public BasicUser UpdateAuthor { get; set; }
 
         public DateTimeOffset UpdateDate { get; set; }
+
+        public Visibility Visibility { get; set; }
 
         public static Comment Create(string body)
         {

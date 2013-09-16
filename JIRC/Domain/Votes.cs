@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace JIRC.Domain
 {
     public class Votes : BasicVotes
     {
-        public IEnumerable<BasicUser> Users { get; set; }
+        public IEnumerable<BasicUser> Voters { get; set; }
     }
 }

@@ -25,19 +25,22 @@ namespace JIRC.Clients
 
         public JiraVersion GetVersion(Uri versionUri)
         {
-            return client.Get<JiraVersion>(versionUri.ToString());
+            var json = client.Get<JsonObject>(versionUri.ToString());
+            return VersionJsonParser.Parse(json);
         }
 
         public JiraVersion CreateVersion(VersionInput versionInput)
         {
             var json = VersionInputJsonGenerator.Generate(versionInput);
-            return client.Post<JiraVersion>(baseVersionUri.ToString(), json);
+            var response = client.Post<JsonObject>(baseVersionUri.ToString(), json);
+            return VersionJsonParser.Parse(response);
         }
 
         public JiraVersion UpdateVersion(Uri versionUri, VersionInput versionInput)
         {
             var json = VersionInputJsonGenerator.Generate(versionInput);
-            return client.Put<JiraVersion>(versionUri.ToString(), json);
+            var response = client.Put<JsonObject>(versionUri.ToString(), json);
+            return VersionJsonParser.Parse(response);
         }
 
         public void RemoveVersion(Uri versionUri)
@@ -75,13 +78,15 @@ namespace JIRC.Clients
         public JiraVersion MoveVersionAfter(Uri versionUri, Uri afterVersionUri)
         {
             var json = new JsonObject { { "after", afterVersionUri.ToString() } };
-            return client.Post<JiraVersion>(GetMoveVersionUri(versionUri), json);
+            var response = client.Post<JsonObject>(GetMoveVersionUri(versionUri), json);
+            return VersionJsonParser.Parse(response);
         }
 
         public JiraVersion MoveVersion(Uri versionUri, VersionPosition versionPosition)
         {
-            var json = VersionPositionInputGenerator.Generate(versionPosition);
-            return client.Post<JiraVersion>(GetMoveVersionUri(versionUri), json);
+            var json = VersionPositionInputJsonGenerator.Generate(versionPosition);
+            var response = client.Post<JsonObject>(GetMoveVersionUri(versionUri), json);
+            return VersionJsonParser.Parse(response);
         }
 
         private static string GetRelatedIssuesCountUri(Uri versionUri)

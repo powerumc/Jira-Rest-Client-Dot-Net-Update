@@ -1,8 +1,8 @@
 ﻿
 using System;
-using System.Globalization;
 
 using JIRC.Domain.Input;
+using JIRC.Extensions;
 
 using ServiceStack.Text;
 
@@ -27,7 +27,7 @@ namespace JIRC.Internal.Json.Gen
             if (versionInput.ReleaseDate != null)
             {
                 var dt = (DateTimeOffset)versionInput.ReleaseDate;
-                json.Add("releaseDate", dt.ToString("o", CultureInfo.InvariantCulture));
+                json.Add("releaseDate", dt.ToRestString());
             }
 
             json.Add("released", versionInput.Released.ToString().ToLower());

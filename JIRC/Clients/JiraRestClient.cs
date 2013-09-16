@@ -39,7 +39,6 @@ namespace JIRC.Clients
 
             JsConfig.DateHandler = JsonDateHandler.ISO8601;
 
-            IssueClient = new JiraIssueRestClient(client);
             SessionClient = new JiraSessionRestClient(client, serverUri);
             UserClient = new JiraUserRestClient(client);
             ProjectClient = new JiraProjectRestClient(client);
@@ -48,6 +47,7 @@ namespace JIRC.Clients
             SearchClient = new JiraSearchRestClient(client);
             VersionClient = new JiraVersionRestClient(client);
             ProjectRolesClient = new JiraProjectRolesRestClient(client);
+            IssueClient = new JiraIssueRestClient(client, MetadataClient, SessionClient);
         }
 
         public IIssueRestClient IssueClient { get; private set; }

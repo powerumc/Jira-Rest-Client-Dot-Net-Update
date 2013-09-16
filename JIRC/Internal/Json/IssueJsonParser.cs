@@ -37,8 +37,8 @@ namespace JIRC.Internal.Json
                     issue.TransitionsUri = issue.Self.Append("transitions");
                 }
 
-                issue.FixVersions = fields.Get<IEnumerable<JiraVersion>>(FieldKeys.FixVersions);
-                issue.AffectedVersions = fields.Get<IEnumerable<JiraVersion>>(FieldKeys.AffectedVersions);
+                issue.FixVersions = fields.ArrayObjects(FieldKeys.FixVersions).ConvertAll(VersionJsonParser.Parse);
+                issue.AffectedVersions = fields.ArrayObjects(FieldKeys.AffectedVersions).ConvertAll(VersionJsonParser.Parse);
                 issue.Watchers = fields.Get<BasicWatchers>("watches");
                 issue.Votes = fields.Get<BasicVotes>("votes");
             }

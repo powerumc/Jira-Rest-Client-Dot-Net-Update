@@ -9,7 +9,7 @@ using ServiceStack.Text;
 
 namespace JIRC.Internal.Json.Gen
 {
-    internal static class VersionPositionInputGenerator
+    internal static class VersionPositionInputJsonGenerator
     {
         internal static JsonObject Generate(VersionPosition versionPosition)
         {

@@ -22,16 +22,7 @@ namespace JIRC.Internal.Json
                 Lead = json.Get<BasicUser>("lead"),
                 Url = json.Get<Uri>("url"),
 
-                Versions = json.ArrayObjects("versions").ConvertAll(x => new JiraVersion
-                {
-                    Id = x.Get<int>("id"),
-                    Name = x.Get("name"),
-                    Description = x.Get("description"),
-                    Self = x.Get<Uri>("self"),
-                    Archived = x.Get<bool>("archived"),
-                    Released = x.Get<bool>("released"),
-                    ReleaseDate = x.Get<DateTimeOffset>("releasedate")
-                }),
+                Versions = json.ArrayObjects("versions").ConvertAll(VersionJsonParser.Parse),
 
                 Components = json.ArrayObjects("components").ConvertAll(x => new BasicComponent
                 {
