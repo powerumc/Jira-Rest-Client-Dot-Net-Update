@@ -240,6 +240,42 @@ namespace JIRC.Clients
         }
 
         /// <summary>
+        /// Retrieves a list of users who may be used as assignee when editing an issue. For a list of users when creating an issue, see <see cref="IProjectRestClient.GetAssignableUsers(string)"/>.
+        /// </summary>
+        /// <param name="issueKey">The unique key for the issue (e.g. "AA-123").</param>
+        /// <returns>Returns a list of users who may be assigned to an issue during an edit.</returns>
+        /// <exception cref="WebException">The project is not found, or the calling user does not have permission to view it.</exception>
+        public IEnumerable<User> GetAssignableUsers(string issueKey)
+        {
+            return GetAssignableUsers(issueKey, null, null);
+        }
+
+        /// <summary>
+        /// Retrieves a list of users who may be used as assignee when editing an issue. For a list of users when creating an issue, see <see cref="IProjectRestClient.GetAssignableUsers(Uri, int?, int?)"/>.
+        /// </summary>
+        /// <param name="issueKey">The unique key of issue (e.g. AA-123).</param>
+        /// <param name="startAt">The index of the first user to return (0-based).</param>
+        /// <param name="maxResults">The maximum number of users to return (defaults to 50). The maximum allowed value is 1000. If you specify a value that is higher than this number, your search results will be truncated.</param>
+        /// <returns>Returns a list of users who may be assigned to an issue during creation.</returns>
+        public IEnumerable<User> GetAssignableUsers(string issueKey, int? startAt, int? maxResults)
+        {
+            var qb = new UriBuilder(client.BaseUri.AppendPath(JiraUserRestClient.UserAssignableSearchUriPrefix));
+            qb.AppendQuery("issueKey", issueKey);
+
+            if (maxResults != null)
+            {
+                qb.AppendQuery("maxResults", maxResults.ToString());
+            }
+
+            if (startAt != null)
+            {
+                qb.AppendQuery("startAt", startAt.ToString());
+            }
+
+            return client.Get<IEnumerable<User>>(qb.Uri.ToString());
+        }
+
+        /// <summary>
         /// Casts your vote on the selected issue. Casting a vote on already votes issue by the caller, causes the exception.
         /// </summary>
         /// <param name="votesUri">URI of the voters resource for the selected issue. Usually obtained by getting the <see cref="BasicVotes.Self"/> property on the <see cref="Issue"/>.</param>

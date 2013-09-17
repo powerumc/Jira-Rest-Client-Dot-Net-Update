@@ -1,30 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IUserRestClient.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Net;
 
 using JIRC.Domain;
 
 namespace JIRC
 {
+    /// <summary>
+    /// An interface for handling Users within JIRA.
+    /// </summary>
     public interface IUserRestClient
     {
+        /// <summary>
+        /// Gets detailed information about the user.
+        /// </summary>
+        /// <param name="username">The login username for the user.</param>
+        /// <returns>Detailed information about the user.</returns>
+        /// <exception cref="WebException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
         User GetUser(string username);
 
+        /// <summary>
+        /// Gets detailed information about the user.
+        /// </summary>
+        /// <param name="userUri">The URI for the user resource.</param>
+        /// <returns>Detailed information about the user.</returns>
+        /// <exception cref="WebException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
         User GetUser(Uri userUri);
-
-        IEnumerable<User> GetAssignableUsers(BasicProject project);
-
-        IEnumerable<User> GetAssignableUsers(BasicProject project, int? startAt, int? maxResults);
-
-        IEnumerable<User> GetAssignableUsers(BasicIssue issue);
-
-        IEnumerable<User> GetAssignableUsers(BasicIssue issue, int startAt, int maxResults);
-
-        IEnumerable<User> GetAssignableUsersForProject(string projectKey);
-
-        IEnumerable<User> GetAssignableUsersForProject(string projectKey, int? startAt, int? maxResults);
-
-        IEnumerable<User> GetAssignableUsersForIssue(string projectKey);
-
-        IEnumerable<User> GetAssignableUsersForIssue(string projectKey, int? startAt, int? maxResults);
     }
 }

@@ -1,5 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="JiraUserRestClient.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Net;
 
 using JIRC.Domain;
 using JIRC.Extensions;
@@ -9,19 +15,35 @@ using ServiceStack.Text;
 
 namespace JIRC.Clients
 {
+    /// <summary>
+    /// The REST client for Users in JIRA.
+    /// </summary>
     internal class JiraUserRestClient : IUserRestClient
     {
-        private const string UserUriPrefix = "/user";
+        /// <summary>
+        /// The URI resource used when searching for users.
+        /// </summary>
+        internal const string UserAssignableSearchUriPrefix = "/user/assignable/search";
 
-        private const string UserAssignableSearchUriPrefix = "/user/assignable/search";
+        private const string UserUriPrefix = "/user";
 
         private readonly JsonServiceClient client;
 
+        /// <summary>
+        /// Initializes a new instance of the User REST client.
+        /// </summary>
+        /// <param name="client">The JSON client that has been set up for a specific JIRA instance.</param>
         public JiraUserRestClient(JsonServiceClient client)
         {
             this.client = client;
         }
 
+        /// <summary>
+        /// Gets detailed information about the user.
+        /// </summary>
+        /// <param name="username">The login username for the user.</param>
+        /// <returns>Detailed information about the user.</returns>
+        /// <exception cref="WebException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
         public User GetUser(string username)
         {
             var qb = new UriBuilder(client.BaseUri.AppendPath(UserUriPrefix));
@@ -31,75 +53,15 @@ namespace JIRC.Clients
             return GetUser(qb.Uri);
         }
 
+        /// <summary>
+        /// Gets detailed information about the user.
+        /// </summary>
+        /// <param name="userUri">The URI for the user resource.</param>
+        /// <returns>Detailed information about the user.</returns>
+        /// <exception cref="WebException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
         public User GetUser(Uri userUri)
         {
             return client.Get<User>(userUri.ToString());
-        }
-
-        public IEnumerable<User> GetAssignableUsers(BasicProject project)
-        {
-            return GetAssignableUsersForProject(project.Key, null, null);
-        }
-
-        public IEnumerable<User> GetAssignableUsers(BasicProject project, int? startAt, int? maxResults)
-        {
-            return GetAssignableUsersForProject(project.Key, startAt, maxResults);
-        }
-
-        public IEnumerable<User> GetAssignableUsers(BasicIssue issue)
-        {
-            return GetAssignableUsersForIssue(issue.Key, null, null);
-        }
-
-        public IEnumerable<User> GetAssignableUsers(BasicIssue issue, int startAt, int maxResults)
-        {
-            return GetAssignableUsersForIssue(issue.Key, null, null);
-        }
-
-        public IEnumerable<User> GetAssignableUsersForProject(string projectKey)
-        {
-            return GetAssignableUsersForProject(projectKey, null, null);
-        }
-
-        public IEnumerable<User> GetAssignableUsersForProject(string projectKey, int? startAt, int? maxResults)
-        {
-            var qb = new UriBuilder(client.BaseUri.AppendPath(UserAssignableSearchUriPrefix));
-            qb.AppendQuery("project", projectKey);
-
-            if (maxResults != null)
-            {
-                qb.AppendQuery("maxResults", maxResults.ToString());
-            }
-
-            if (startAt != null)
-            {
-                qb.AppendQuery("startAt", startAt.ToString());
-            }
-
-            return client.Get<IEnumerable<User>>(qb.Uri.ToString());
-        }
-
-        public IEnumerable<User> GetAssignableUsersForIssue(string issueKey)
-        {
-            return GetAssignableUsersForIssue(issueKey, null, null);
-        }
-
-        public IEnumerable<User> GetAssignableUsersForIssue(string issueKey, int? startAt, int? maxResults)
-        {
-            var qb = new UriBuilder(client.BaseUri.AppendPath(UserAssignableSearchUriPrefix));
-            qb.AppendQuery("issueKey", issueKey);
-
-            if (maxResults != null)
-            {
-                qb.AppendQuery("maxResults", maxResults.ToString());
-            }
-
-            if (startAt != null)
-            {
-                qb.AppendQuery("startAt", startAt.ToString());
-            }
-
-            return client.Get<IEnumerable<User>>(qb.Uri.ToString());
         }
     }
 }
