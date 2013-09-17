@@ -53,7 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\GetCreateIssueMetadataOptionsBuilder.cs" />
+    <Compile Include="Domain\AvatarSizes.cs" />
+    <Compile Include="Domain\Input\GetCreateIssueMetadataOptionsBuilder.cs" />
     <Compile Include="Clients\JiraComponentRestClient.cs" />
     <Compile Include="Clients\JiraIssueRestClient.cs" />
     <Compile Include="Clients\JiraMetadataRestClient.cs" />
