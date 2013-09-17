@@ -22,8 +22,8 @@ namespace JIRC.Domain
             IEnumerable<JiraVersion> versions,
             IEnumerable<BasicComponent> components,
             IEnumerable<IssueType> issueTypes,
-            List<BasicProjectRole> projectRoles)
-            :base(self, key, name)
+            IEnumerable<BasicProjectRole> projectRoles)
+            : base(self, key, name)
         {
             Description = description;
             Lead = lead;

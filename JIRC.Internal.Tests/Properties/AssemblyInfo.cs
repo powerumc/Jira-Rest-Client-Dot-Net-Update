@@ -1,5 +1,10 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -8,9 +13,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("JIRC.Internal.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("David Bevin")]
 [assembly: AssemblyProduct("JIRC.Internal.Tests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
+[assembly: AssemblyCopyright("Copyright © David Bevin 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

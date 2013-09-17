@@ -251,7 +251,7 @@ namespace JIRC.Clients
         }
 
         /// <summary>
-        /// Retrieves a list of users who may be used as assignee when editing an issue. For a list of users when creating an issue, see <see cref="IProjectRestClient.GetAssignableUsers(Uri, int?, int?)"/>.
+        /// Retrieves a list of users who may be used as assignee when editing an issue. For a list of users when creating an issue, see <see cref="IProjectRestClient.GetAssignableUsers(string, int?, int?)"/>.
         /// </summary>
         /// <param name="issueKey">The unique key of issue (e.g. AA-123).</param>
         /// <param name="startAt">The index of the first user to return (0-based).</param>

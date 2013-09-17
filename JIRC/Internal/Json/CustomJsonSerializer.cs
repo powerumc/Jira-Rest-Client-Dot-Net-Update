@@ -24,6 +24,7 @@ namespace JIRC.Internal.Json
             JsConfig<Project>.RawDeserializeFn = a => ProjectJsonParser(JsonObject.Parse(a));
             JsConfig<CimProject>.RawDeserializeFn = a => CimProjectJsonParser(JsonObject.Parse(a));
             JsConfig<JiraVersion>.RawDeserializeFn = a => JiraVersionJsonParser(JsonObject.Parse(a));
+            JsConfig<BasicVotes>.RawDeserializeFn = a => BasicVotesJsonParser(JsonObject.Parse(a));
         }
 
         internal static BasicResolution BasicResolutionJsonParser(JsonObject json)
@@ -85,6 +86,11 @@ namespace JIRC.Internal.Json
         internal static BasicProject BasicProjectJsonParser(JsonObject json)
         {
             return new BasicProject(json.Get<Uri>("self"), json.Get("key"), json.Get("name"));
+        }
+
+        private static BasicVotes BasicVotesJsonParser(JsonObject json)
+        {
+            return new BasicVotes(json.Get<Uri>("self"), json.Get<int>("votes"), json.Get<bool>("hasVoted"));
         }
 
         private static Project ProjectJsonParser(JsonObject json)

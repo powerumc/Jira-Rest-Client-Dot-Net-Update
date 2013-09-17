@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Field.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace JIRC.Domain
 {

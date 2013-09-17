@@ -1,7 +1,11 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IMetadataRestClient.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using JIRC.Domain;
 

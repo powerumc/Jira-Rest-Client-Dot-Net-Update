@@ -36,7 +36,7 @@ namespace JIRC.Domain
 
     public static class IssueFieldIdHelper
     {
-        private static readonly Dictionary<IssueFieldId, string> FieldNames = new Dictionary<IssueFieldId, string>()
+        private static readonly Dictionary<IssueFieldId, string> FieldNames = new Dictionary<IssueFieldId, string>
         {
             { IssueFieldId.AffectsVersion, "versions" },
             { IssueFieldId.Assignee, "assignee" },

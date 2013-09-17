@@ -1,7 +1,10 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SearchResult.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace JIRC.Domain
 {

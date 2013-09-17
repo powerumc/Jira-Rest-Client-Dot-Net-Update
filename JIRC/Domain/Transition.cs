@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Transition.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-using Microsoft.SqlServer.Server;
+using System;
+using System.Collections.Generic;
 
 namespace JIRC.Domain
 {

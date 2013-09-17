@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
-using JIRC.Clients;
 using JIRC.Domain;
 using JIRC.Domain.Input;
 

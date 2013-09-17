@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TransitionInput.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 
 namespace JIRC.Domain.Input

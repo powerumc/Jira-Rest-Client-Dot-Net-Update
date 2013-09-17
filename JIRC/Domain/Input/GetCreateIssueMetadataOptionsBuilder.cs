@@ -10,11 +10,11 @@ namespace JIRC.Domain.Input
 {
     public class GetCreateIssueMetadataOptionsBuilder
     {
-        private List<string> expandos = new List<string>();
-        private List<string> issueTypeNames = new List<string>();
-        private List<long> issueTypeIds = new List<long>();
-        private List<string> projectKeys = new List<string>();
-        private List<long> projectIds = new List<long>();
+        private readonly List<string> expandos = new List<string>();
+        private readonly List<string> issueTypeNames = new List<string>();
+        private readonly List<long> issueTypeIds = new List<long>();
+        private readonly List<string> projectKeys = new List<string>();
+        private readonly List<long> projectIds = new List<long>();
 
         public GetCreateIssueMetadataOptionsBuilder WithExpandedIssueTypesFields()
         {

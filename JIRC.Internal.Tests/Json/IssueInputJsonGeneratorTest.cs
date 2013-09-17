@@ -1,8 +1,11 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IssueInputJsonGeneratorTest.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
-using System.Linq;
 using JIRC.Domain.Input;
-using JIRC.Internal.Json;
 using JIRC.Internal.Json.Gen;
 
 using NUnit.Framework;
