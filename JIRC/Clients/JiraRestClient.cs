@@ -52,6 +52,8 @@ namespace JIRC.Clients
         static JiraRestClient()
         {
             JsConfig.DateHandler = JsonDateHandler.ISO8601;
+
+            CustomJsonSerializer.RegisterAllClasses();
         }
 
         public IIssueRestClient IssueClient { get; private set; }

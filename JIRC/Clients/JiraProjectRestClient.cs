@@ -32,8 +32,7 @@ namespace JIRC.Clients
 
         public Project GetProject(string key)
         {
-            var json = client.Get<JsonObject>("/{0}/{1}".Fmt(ProjectUriPrefix, key));
-            return ProjectJsonParser.Parse(json);
+            return client.Get<Project>("/{0}/{1}".Fmt(ProjectUriPrefix, key));
         }
     }
 }

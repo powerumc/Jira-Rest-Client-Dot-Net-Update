@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace JIRC.Domain
 {
     public class IssueLinksType : AddressableNamedEntity
     {
-        public string Id { get; set; }
+        public IssueLinksType(Uri self, string id, string name, string inward, string outward)
+            : base(self, name)
+        {
+            Id = id;
+            Inward = inward;
+            Outward = outward;
+        }
 
-        public string Inward { get; set; }
+        public string Id { get; private set; }
 
-        public string Outward { get; set; }
+        public string Inward { get; private set; }
+
+        public string Outward { get; private set; }
     }
 }

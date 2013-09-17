@@ -1,4 +1,10 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CimProject.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 
 namespace JIRC.Domain
@@ -12,8 +18,8 @@ namespace JIRC.Domain
             IssueTypes = issueTypes;
         }
 
-        public Dictionary<string, Uri> AvatarUris { get; set; }
+        public Dictionary<string, Uri> AvatarUris { get; private set; }
 
-        public IEnumerable<CimIssueType> IssueTypes { get; set; }
+        public IEnumerable<CimIssueType> IssueTypes { get; private set; }
     }
 }

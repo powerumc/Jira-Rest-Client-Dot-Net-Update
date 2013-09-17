@@ -1,4 +1,10 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------
+// <copyright file="IJiraRestClient.cs" company="David Bevin">
+//     Copyright (c) David Bevin.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 
 using JIRC.Domain;
@@ -42,8 +48,7 @@ namespace JIRC.Clients
 
         public IEnumerable<IssueLinksType> GetIssueLinkTypes()
         {
-            var json = client.Get<JsonObject>(IssueLinkTypeResource);
-            return IssueLinkTypesJsonParser.Parse(json);
+            return client.Get<IEnumerable<IssueLinksType>>(IssueLinkTypeResource);
         }
 
         public Status GetStatus(Uri uri)

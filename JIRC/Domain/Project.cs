@@ -11,16 +11,41 @@ namespace JIRC.Domain
 {
     public class Project : BasicProject
     {
-        public IEnumerable<BasicComponent> Components { get; set; }
-        public string Description { get; set; }
-        public IEnumerable<IssueType> IssueTypes { get; set; }
+        // TODO: Expandos!
+        public Project(
+            Uri self,
+            string key,
+            string name,
+            string description,
+            BasicUser lead,
+            Uri uri,
+            IEnumerable<JiraVersion> versions,
+            IEnumerable<BasicComponent> components,
+            IEnumerable<IssueType> issueTypes,
+            List<BasicProjectRole> projectRoles)
+            :base(self, key, name)
+        {
+            Description = description;
+            Lead = lead;
+            Url = uri;
+            Versions = versions;
+            Components = components;
+            IssueTypes = issueTypes;
+            Roles = projectRoles;
+        }
 
-        public BasicUser Lead { get; set; }
+        public string Description { get; private set; }
 
-        public Uri Url { get; set; }
+        public BasicUser Lead { get; private set; }
 
-        public IEnumerable<JiraVersion> Versions { get; set; }
+        public Uri Url { get; private set; }
 
-        public IEnumerable<BasicProjectRole> Roles { get; set; }
+        public IEnumerable<JiraVersion> Versions { get; private set; }
+
+        public IEnumerable<BasicComponent> Components { get; private set; }
+
+        public IEnumerable<IssueType> IssueTypes { get; private set; }
+
+        public IEnumerable<BasicProjectRole> Roles { get; private set; }
     }
 }

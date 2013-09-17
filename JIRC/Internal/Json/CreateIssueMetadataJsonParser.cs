@@ -10,7 +10,7 @@ namespace JIRC.Internal.Json
     {
         internal static IEnumerable<CimProject> Parse(JsonObject json)
         {
-            return json.ArrayObjects("projects").ConvertAll(CimProjectJsonParser.Parse);
+            return json.Get<IEnumerable<CimProject>>("projects");
         }
     }
 }

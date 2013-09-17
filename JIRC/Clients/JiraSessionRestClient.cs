@@ -1,4 +1,13 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="JiraSessionRestClient.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// <summary>
+//   Defines the JiraSessionRestClient type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 
 using JIRC.Domain;
 using JIRC.Internal.Json;

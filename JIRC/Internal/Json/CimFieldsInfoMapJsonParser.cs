@@ -11,14 +11,14 @@ namespace JIRC.Internal.Json
     {
         private static readonly Dictionary<string, Func<JsonObject, object>> RegisteredAllowedValueParsers = new Dictionary<string, Func<JsonObject, object>>()
         {
-            { "project", BasicProjectJsonParser.Parse },
-            { "version", VersionJsonParser.Parse },
+            { "project", CustomJsonSerializer.BasicProjectJsonParser },
+            { "version", CustomJsonSerializer.JiraVersionJsonParser },
             { "issuetype", BasicIssueTypeJsonParser.Parse },
-            { "priority", BasicPriorityJsonParser.Parse },
+            { "priority", CustomJsonSerializer.BasicPriorityJsonParser },
             //{ "customFieldOption", CustomFieldOptionJsonParser.Parse },
-            { "component", ComponentJsonParser.Parse },
-            { "resolution", BasicResolutionJsonParser.Parse },
-            { "securitylevel", SecurityLevelJsonParser.Parse }
+            { "component", CustomJsonSerializer.ComponentJsonParser },
+            { "resolution", CustomJsonSerializer.BasicResolutionJsonParser },
+            { "securitylevel", CustomJsonSerializer.SecurityLevelJsonParser }
         };
 
         internal static Dictionary<string, CimFieldInfo> Parse(Dictionary<string, JsonObject> json)

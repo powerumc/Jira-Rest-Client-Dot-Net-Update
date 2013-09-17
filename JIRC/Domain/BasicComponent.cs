@@ -4,11 +4,21 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+
 namespace JIRC.Domain
 {
     public class BasicComponent : AddressableNamedEntity
     {
-        public string Description { get; set; }
-        public int Id { get; set; }
+        public BasicComponent(Uri self, long? id, string name, string description)
+            : base(self, name)
+        {
+            Id = id;
+            Description = description;
+        }
+
+        public long? Id { get; private set; }
+
+        public string Description { get; private set; }
     }
 }

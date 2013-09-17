@@ -1,10 +1,24 @@
 ﻿
+using System;
+
 namespace JIRC.Domain
 {
     public class Component : BasicComponent
     {
-        public BasicUser Lead { get; set; }
+        public Component(Uri self, long? id, string name, string description, BasicUser lead)
+            :this(self, id, name, description, lead, null)
+        {
+        }
 
-        public AssigneeInfo AssigneeInfo { get; set; }
+        public Component(Uri self, long? id, string name, string description, BasicUser lead, AssigneeInfo assigneeInfo)
+            : base(self, id, name, description)
+        {
+            Lead = lead;
+            AssigneeInfo = assigneeInfo;
+        }
+
+        public BasicUser Lead { get; private set; }
+
+        public AssigneeInfo AssigneeInfo { get; private set; }
     }
 }

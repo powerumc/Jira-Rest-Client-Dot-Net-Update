@@ -1,9 +1,18 @@
-﻿namespace JIRC.Domain
+﻿using System;
+
+namespace JIRC.Domain
 {
     public class SecurityLevel : AddressableNamedEntity
     {
-        public long Id { get; set; }
+        public SecurityLevel(Uri self, long id, string name, string description)
+            : base(self, name)
+        {
+            Id = id;
+            Description = description;
+        }
 
-        public string Description { get; set; }
+        public long Id { get; private set; }
+
+        public string Description { get; private set; }
     }
 }

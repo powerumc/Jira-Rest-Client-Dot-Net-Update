@@ -149,7 +149,17 @@ namespace JIRC.Domain.Input
 
         public IssueInputBuilder SetPriority(BasicPriority priority)
         {
-            return SetPriorityId(priority.Id);
+            if (priority == null)
+            {
+                throw new ArgumentNullException("priority");
+            }
+
+            if (priority.Id == null)
+            {
+                throw new ArgumentException("Priority Id cannot be null", "priority");
+            }
+
+            return SetPriorityId((long)priority.Id);
         }
 
         public IssueInputBuilder SetPriorityId(long id)
