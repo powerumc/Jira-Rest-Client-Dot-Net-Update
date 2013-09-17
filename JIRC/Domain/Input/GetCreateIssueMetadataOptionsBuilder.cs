@@ -1,11 +1,12 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GetCreateIssueMetadataOptionsBuilder.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using JIRC.Domain.Input;
-
-namespace JIRC.Clients
+namespace JIRC.Domain.Input
 {
     public class GetCreateIssueMetadataOptionsBuilder
     {
@@ -17,42 +18,42 @@ namespace JIRC.Clients
 
         public GetCreateIssueMetadataOptionsBuilder WithExpandedIssueTypesFields()
         {
-            return WithExpandos(GetCreateIssueMetadataOptions.ExpandProjectsIssueTypesFields);
+            return this.WithExpandos(GetCreateIssueMetadataOptions.ExpandProjectsIssueTypesFields);
         }
 
         public GetCreateIssueMetadataOptionsBuilder WithExpandos(params string[] values)
         {
-            expandos.AddRange(values);
+            this.expandos.AddRange(values);
             return this;
         }
 
         public GetCreateIssueMetadataOptionsBuilder WithIssueTypeNames(params string[] values)
         {
-            issueTypeNames.AddRange(values);
+            this.issueTypeNames.AddRange(values);
             return this;
         }
 
         public GetCreateIssueMetadataOptionsBuilder WithIssueTypeIds(params long[] values)
         {
-            issueTypeIds.AddRange(values);
+            this.issueTypeIds.AddRange(values);
             return this;
         }
 
         public GetCreateIssueMetadataOptionsBuilder WithProjectKeys(params string[] values)
         {
-            projectKeys.AddRange(values);
+            this.projectKeys.AddRange(values);
             return this;
         }
 
         public GetCreateIssueMetadataOptionsBuilder WithProjectIds(params long[] values)
         {
-            projectIds.AddRange(values);
+            this.projectIds.AddRange(values);
             return this;
         }
 
         public GetCreateIssueMetadataOptions Build()
         {
-            return new GetCreateIssueMetadataOptions(expandos, issueTypeNames, issueTypeIds, projectKeys, projectIds);
+            return new GetCreateIssueMetadataOptions(this.expandos, this.issueTypeNames, this.issueTypeIds, this.projectKeys, this.projectIds);
         }
     }
 }
