@@ -7,16 +7,16 @@ using ServiceStack.Text;
 
 namespace JIRC.Internal.Json.Gen
 {
-    internal class IssueInputJsonGenerator
+    internal static class IssueUpdateJsonGenerator
     {
-        internal static JsonObject Generate(IssueInput issue)
+        internal static JsonObject Generate(IEnumerable<FieldInput> fields)
         {
             var jsonObject = new JsonObject();
             var list = new Dictionary<string, object>();
 
-            if (issue != null && issue.Fields != null)
+            if (fields != null)
             {
-                foreach (var f in issue.Fields.Values.Where(f => f.Value != null))
+                foreach (var f in fields.Where(f => f.Value != null))
                 {
                     list.Add(f.Id, ComplexIssueInputFieldValueJsonGenerator.GenerateFieldValueForJson(f.Value));
                 }

@@ -8,6 +8,7 @@ using System;
 
 using JIRC.Domain;
 using JIRC.Internal;
+using JIRC.Internal.Json;
 
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.Text;
@@ -37,8 +38,6 @@ namespace JIRC.Clients
             this.user = user;
             this.pass = pass;
 
-            JsConfig.DateHandler = JsonDateHandler.ISO8601;
-
             SessionClient = new JiraSessionRestClient(client, serverUri);
             UserClient = new JiraUserRestClient(client);
             ProjectClient = new JiraProjectRestClient(client);
@@ -48,6 +47,11 @@ namespace JIRC.Clients
             VersionClient = new JiraVersionRestClient(client);
             ProjectRolesClient = new JiraProjectRolesRestClient(client);
             IssueClient = new JiraIssueRestClient(client, MetadataClient, SessionClient);
+        }
+
+        static JiraRestClient()
+        {
+            JsConfig.DateHandler = JsonDateHandler.ISO8601;
         }
 
         public IIssueRestClient IssueClient { get; private set; }

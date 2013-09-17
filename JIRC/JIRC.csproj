@@ -147,7 +147,10 @@
     <Compile Include="Internal\Json\Gen\ComplexIssueInputFieldValueJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\ComponentInputWithProjectKeyJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\IssueInputJsonGenerator.cs" />
+    <Compile Include="Internal\Json\Gen\IssuesInputJsonGenerator.cs" />
+    <Compile Include="Internal\Json\Gen\IssueUpdateJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\LinkIssuesInputJsonGenerator.cs" />
+    <Compile Include="Internal\Json\Gen\TransitionInputJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\VersionInputJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\VersionPositionInputJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\VisibilityJsonGenerator.cs" />

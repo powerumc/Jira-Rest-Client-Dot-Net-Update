@@ -12,7 +12,7 @@ namespace JIRC.Domain.Input
             this.values = values;
         }
 
-        internal static ComplexIssueInputFieldValue With(string key, object value)
+        public static ComplexIssueInputFieldValue With(string key, object value)
         {
             var dict = new Dictionary<string, object> { { key, value } };
             return new ComplexIssueInputFieldValue(dict);

@@ -94,7 +94,8 @@ namespace JIRC.Clients
 
         public BulkOperationResult<BasicIssue> CreateIssues(IList<IssueInput> issues)
         {
-            throw new NotImplementedException();
+            var json = IssuesInputJsonGenerator.Generate(issues);
+            return client.Post<BulkOperationResult<BasicIssue>>("issue/bulk", json);
         }
 
         public Issue GetIssue(string key)
@@ -144,12 +145,13 @@ namespace JIRC.Clients
 
         public void Transition(Uri transitionsUri, TransitionInput transitionInput)
         {
-            throw new NotImplementedException();
+            var json = TransitionInputJsonGenerator.Generate(transitionInput, GetServerInfo());
+            client.Post<JsonObject>(transitionsUri.ToString(), json);
         }
 
         public void Transition(Issue issue, TransitionInput transitionInput)
         {
-            throw new NotImplementedException();
+            Transition(issue.TransitionsUri ?? issue.Self.Append("transitions"), transitionInput);
         }
 
         public void Vote(Uri votesUri)
