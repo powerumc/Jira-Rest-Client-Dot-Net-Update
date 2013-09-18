@@ -9,7 +9,7 @@ namespace JIRC.Internal.Json
 {
     internal static class CimFieldsInfoMapJsonParser
     {
-        private static readonly Dictionary<string, Func<JsonObject, object>> RegisteredAllowedValueParsers = new Dictionary<string, Func<JsonObject, object>>()
+        private static readonly Dictionary<string, Func<JsonObject, object>> RegisteredAllowedValueParsers = new Dictionary<string, Func<JsonObject, object>>
         {
             { "project", CustomJsonSerializer.BasicProjectJsonParser },
             { "version", CustomJsonSerializer.JiraVersionJsonParser },

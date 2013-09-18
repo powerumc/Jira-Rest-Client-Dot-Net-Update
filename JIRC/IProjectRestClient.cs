@@ -6,9 +6,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 
 using JIRC.Domain;
+
+using ServiceStack.ServiceClient.Web;
 
 namespace JIRC
 {
@@ -21,7 +22,7 @@ namespace JIRC
         /// Returns all projects, which are visible for the calling user. If no user is logged in, it returns the list of projects that are visible when using anonymous access.
         /// </summary>
         /// <returns>Projects that the caller user can see.</returns>
-        /// <exception cref="WebException">An error occurred when retrieving the list of projects.</exception>
+        /// <exception cref="WebServiceException">An error occurred when retrieving the list of projects.</exception>
         IEnumerable<BasicProject> GetAllProjects();
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace JIRC
         /// </summary>
         /// <param name="key">The unique key for the project (e.g. "AA").</param>
         /// <returns>Detailed information about the project.</returns>
-        /// <exception cref="WebException">The project is not found, or the calling user does not have permission to view it.</exception>
+        /// <exception cref="WebServiceException">The project is not found, or the calling user does not have permission to view it.</exception>
         Project GetProject(string key);
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace JIRC
         /// </summary>
         /// <param name="projectUri">The URI for the requested project. Usually retrieved by getting the property <see cref="BasicProject.Self"/>.</param>
         /// <returns>Detailed information about the project.</returns>
-        /// <exception cref="WebException">The project is not found, or the calling user does not have permission to view it.</exception>
+        /// <exception cref="WebServiceException">The project is not found, or the calling user does not have permission to view it.</exception>
         Project GetProject(Uri projectUri);
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace JIRC
         /// </summary>
         /// <param name="projectKey">The unique key for the project (e.g. "AA").</param>
         /// <returns>Returns a list of users who may be assigned to an issue during creation.</returns>
-        /// <exception cref="WebException">The project is not found, or the calling user does not have permission to view it.</exception>
+        /// <exception cref="WebServiceException">The project is not found, or the calling user does not have permission to view it.</exception>
         IEnumerable<User> GetAssignableUsers(string projectKey);
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace JIRC.Internal
+﻿namespace JIRC.Domain
 {
     public static class ServerVersionConstants
     {

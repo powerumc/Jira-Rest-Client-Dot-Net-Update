@@ -8,9 +8,19 @@
             Value = value;
         }
 
-        public VisibilityType Type { get; set; }
+        public VisibilityType Type { get; private set; }
 
-        public string Value { get; set; }
+        public string Value { get; private set; }
+
+        public static Visibility Role(string value)
+        {
+            return new Visibility(VisibilityType.Role, value);
+        }
+
+        public static Visibility Group(string value)
+        {
+            return new Visibility(VisibilityType.Group, value);
+        }
 
         public enum VisibilityType
         {

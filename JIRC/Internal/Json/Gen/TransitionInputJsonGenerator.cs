@@ -1,7 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TransitionInputJsonGenerator.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System.Linq;
-using System.Text;
 
 using JIRC.Domain;
 using JIRC.Domain.Input;

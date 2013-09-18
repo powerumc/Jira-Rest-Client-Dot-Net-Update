@@ -5,10 +5,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Net;
 
 using JIRC.Domain;
 using JIRC.Domain.Input;
+
+using ServiceStack.ServiceClient.Web;
 
 namespace JIRC
 {
@@ -22,7 +23,7 @@ namespace JIRC
         /// </summary>
         /// <param name="componentUri">The URI for the selected component resource.</param>
         /// <returns>Returns detailed information about the component.</returns>
-        /// <exception cref="WebException">There is no component with the given key, or if the calling user does not have permission to view the component.</exception>
+        /// <exception cref="WebServiceException">There is no component with the given key, or if the calling user does not have permission to view the component.</exception>
         Component GetComponent(Uri componentUri);
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace JIRC
         /// <param name="projectKey">The key for the project in which to create the new component.</param>
         /// <param name="componentInput">A class containing the essential information about the component.</param>
         /// <returns>The newly created component.</returns>
-        /// <exception cref="WebException">The caller is not logged in and does not have permission to create components in the project.</exception>
+        /// <exception cref="WebServiceException">The caller is not logged in and does not have permission to create components in the project.</exception>
         Component CreateComponent(string projectKey, ComponentInput componentInput);
 
         /// <summary>
@@ -40,14 +41,14 @@ namespace JIRC
         /// <param name="componentUri">The URI for the selected component.</param>
         /// <param name="componentInput">A class containing the essential information about the component.</param>
         /// <returns>The updated component.</returns>
-        /// <exception cref="WebException">The caller is not logged in and does not have permission to edit components.</exception>
+        /// <exception cref="WebServiceException">The caller is not logged in and does not have permission to edit components.</exception>
         Component UpdateComponent(Uri componentUri, ComponentInput componentInput);
 
         /// <summary>
         /// Deletes a project component.
         /// </summary>
         /// <param name="componentUri">The URI of the component to delete.</param>
-        /// <exception cref="WebException">The caller is not logged in and does not have permission to delete the component.</exception>
+        /// <exception cref="WebServiceException">The caller is not logged in and does not have permission to delete the component.</exception>
         void RemoveComponent(Uri componentUri);
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace JIRC
         /// </summary>
         /// <param name="componentUri">The URI of the component to delete.</param>
         /// <param name="moveIssueToComponentUri">Any issues assigned to the component being deleted will be moved to the specified component.</param>
-        /// <exception cref="WebException">The caller is not logged in and does not have permission to delete the component.</exception>
+        /// <exception cref="WebServiceException">The caller is not logged in and does not have permission to delete the component.</exception>
         void RemoveComponent(Uri componentUri, Uri moveIssueToComponentUri);
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace JIRC
         /// </summary>
         /// <param name="componentUri">The URI for the selected component.</param>
         /// <returns>The number of issues associated with the component.</returns>
-        /// <exception cref="WebException">The caller is not logged in and does not have permission to view the component.</exception>
+        /// <exception cref="WebServiceException">The caller is not logged in and does not have permission to view the component.</exception>
         int GetComponentRelatedIssuesCount(Uri componentUri);
     }
 }

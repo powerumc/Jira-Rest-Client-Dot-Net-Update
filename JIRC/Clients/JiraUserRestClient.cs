@@ -5,7 +5,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Net;
 
 using JIRC.Domain;
 using JIRC.Extensions;
@@ -43,7 +42,7 @@ namespace JIRC.Clients
         /// </summary>
         /// <param name="username">The login username for the user.</param>
         /// <returns>Detailed information about the user.</returns>
-        /// <exception cref="WebException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
+        /// <exception cref="WebServiceException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
         public User GetUser(string username)
         {
             var qb = new UriBuilder(client.BaseUri.AppendPath(UserUriPrefix));
@@ -58,7 +57,7 @@ namespace JIRC.Clients
         /// </summary>
         /// <param name="userUri">The URI for the user resource.</param>
         /// <returns>Detailed information about the user.</returns>
-        /// <exception cref="WebException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
+        /// <exception cref="WebServiceException">The specified username does not exist, or the caller does not have permission to view the users.</exception>
         public User GetUser(Uri userUri)
         {
             return client.Get<User>(userUri.ToString());

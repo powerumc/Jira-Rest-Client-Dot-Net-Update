@@ -161,8 +161,7 @@
     <Compile Include="Internal\Json\TransitionJsonParser.cs" />
     <Compile Include="Internal\Json\VersionRelatedIssuesCountJsonParser.cs" />
     <Compile Include="Internal\Json\WatchersJsonParser.cs" />
-    <Compile Include="Internal\ServerVersionConstants.cs" />
-    <Compile Include="Internal\SessionPost.cs" />
+    <Compile Include="Domain\ServerVersionConstants.cs" />
     <Compile Include="IProjectRestClient.cs" />
     <Compile Include="Clients\JiraRestClient.cs" />
     <Compile Include="Domain\BasicProject.cs" />

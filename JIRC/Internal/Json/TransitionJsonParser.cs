@@ -1,11 +1,14 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TransitionJsonParser.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using JIRC.Domain;
 
-using ServiceStack.Common.Extensions;
 using ServiceStack.Text;
 
 namespace JIRC.Internal.Json

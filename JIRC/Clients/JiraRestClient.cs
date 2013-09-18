@@ -6,8 +6,6 @@
 
 using System;
 
-using JIRC.Domain;
-using JIRC.Internal;
 using JIRC.Internal.Json;
 
 using ServiceStack.ServiceClient.Web;
@@ -15,28 +13,43 @@ using ServiceStack.Text;
 
 namespace JIRC.Clients
 {
+    /// <summary>
+    /// The client for accessing JIRA via the REST API.
+    /// </summary>
     public class JiraRestClient : IJiraRestClient
     {
         private const string LatestRestUri = "/rest/api/latest";
 
-        private readonly JsonServiceClient client;
-
-        private readonly string pass;
-
-        private readonly Uri serverUri;
-
-        private readonly string user;
-
-        private SessionInfo cookie;
-
-        public JiraRestClient(Uri serverUri, string user, string pass)
+        static JiraRestClient()
         {
-            var baseUri = new Uri(serverUri, LatestRestUri);
-            client = new JsonServiceClient(baseUri.ToString());
+            JsConfig.DateHandler = JsonDateHandler.ISO8601;
 
-            this.serverUri = serverUri;
-            this.user = user;
-            this.pass = pass;
+            CustomJsonSerializer.RegisterAllClasses();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the REST client for JIRA. This will use Basic Authentication.
+        /// </summary>
+        /// <param name="serverUri">The base URI for the JIRA instance.</param>
+        /// <param name="user">The username to use to connect with.</param>
+        /// <param name="pass">The password to use to connect with.</param>
+        public JiraRestClient(Uri serverUri, string user, string pass)
+            : this(serverUri, GetClientWithBasicAuth(serverUri, user, pass))
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the REST client for JIRA. This will use Anonymous authentication.
+        /// </summary>
+        /// <param name="serverUri">The base URI for the JIRA instance.</param>
+        public JiraRestClient(Uri serverUri)
+            : this(serverUri, GetAnonymousClient(serverUri))
+        {
+        }
+
+        private JiraRestClient(Uri serverUri, JsonServiceClient client)
+        {
+            ServerUri = serverUri;
 
             SessionClient = new JiraSessionRestClient(client, serverUri);
             UserClient = new JiraUserRestClient(client);
@@ -49,54 +62,72 @@ namespace JIRC.Clients
             IssueClient = new JiraIssueRestClient(client, MetadataClient, SessionClient);
         }
 
-        static JiraRestClient()
-        {
-            JsConfig.DateHandler = JsonDateHandler.ISO8601;
-
-            CustomJsonSerializer.RegisterAllClasses();
-        }
-
+        /// <summary>
+        /// Gets the client for accessing Issues.
+        /// </summary>
         public IIssueRestClient IssueClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing Session information.
+        /// </summary>
         public ISessionRestClient SessionClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing User information.
+        /// </summary>
         public IUserRestClient UserClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing Projects.
+        /// </summary>
         public IProjectRestClient ProjectClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing Components within Projects.
+        /// </summary>
         public IComponentRestClient ComponentClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing Metadata.
+        /// </summary>
         public IMetadataRestClient MetadataClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for performing JQL searches.
+        /// </summary>
         public ISearchRestClient SearchClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing Versions within Projects.
+        /// </summary>
         public IVersionRestClient VersionClient { get; private set; }
 
+        /// <summary>
+        /// Gets the client for accessing Project Role information.
+        /// </summary>
         public IProjectRolesRestClient ProjectRolesClient { get; private set; }
 
-        public void ClearSession()
+        /// <summary>
+        /// Gets the base URI for the JIRA instance.
+        /// </summary>
+        public Uri ServerUri { get; private set; }
+
+        private static JsonServiceClient GetClientWithBasicAuth(Uri serverUri, string username, string password)
         {
-            cookie = null;
-            client.Headers.Clear();
+            var baseUri = new Uri(serverUri, LatestRestUri);
+
+            return new JsonServiceClient(baseUri.ToString())
+            {
+                UserName = username,
+                Password = password,
+                AlwaysSendBasicAuthHeader = true
+            };
         }
 
-        public SessionInfo Login()
+        private static JsonServiceClient GetAnonymousClient(Uri serverUri)
         {
-            var req = new SessionPost { username = user, password = pass };
-            var uri = new Uri(serverUri, "/rest/auth/1/session");
-            var response = client.Post<SessionInfo>(uri.ToString(), req);
-
-            cookie = response;
-            client.Headers.Clear();
-            client.Headers.Add("Cookie", string.Format("{0}={1}", cookie.Session.Name, cookie.Session.Value));
-
-            return response;
-        }
-
-        public void Logout()
-        {
-            // TODO: Logout session
-            //client.Delete("/rest/auth/1/session");
+            var baseUri = new Uri(serverUri, LatestRestUri);
+            return new JsonServiceClient(baseUri.ToString());
         }
     }
 }
