@@ -20,8 +20,6 @@ namespace JIRC.Clients
 
         private const int MaxJqlLengthForGet = 500;
 
-        private static readonly SearchResultParser SearchResultParser = new SearchResultParser();
-
         private readonly JsonServiceClient client;
 
         private readonly Uri searchUri;
@@ -60,9 +58,7 @@ namespace JIRC.Clients
 
             var query = qb.Uri.ToString();
 
-            var json = query.Length > MaxJqlLengthForGet ? client.Put<JsonObject>(query, string.Empty) : client.Get<JsonObject>(query);
-
-            return SearchResultParser.Parse(json);
+            return query.Length > MaxJqlLengthForGet ? client.Put<SearchResult>(query, string.Empty) : client.Get<SearchResult>(query);
         }
 
         public IEnumerable<Filter> GetFavouriteFilters()

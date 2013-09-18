@@ -25,6 +25,10 @@ namespace JIRC.Internal.Json
             JsConfig<CimProject>.RawDeserializeFn = a => CimProjectJsonParser(JsonObject.Parse(a));
             JsConfig<JiraVersion>.RawDeserializeFn = a => JiraVersionJsonParser(JsonObject.Parse(a));
             JsConfig<BasicVotes>.RawDeserializeFn = a => BasicVotesJsonParser(JsonObject.Parse(a));
+            JsConfig<Watchers>.RawDeserializeFn = a => WatchersJsonParser(JsonObject.Parse(a));
+            JsConfig<SearchResult>.RawDeserializeFn = a => SearchResultJsonParser(JsonObject.Parse(a));
+            JsConfig<Session>.RawDeserializeFn = a => SessionJsonParser(JsonObject.Parse(a));
+            JsConfig<LoginInfo>.RawDeserializeFn = a => LoginInfoJsonParser(JsonObject.Parse(a));
         }
 
         internal static BasicResolution BasicResolutionJsonParser(JsonObject json)
@@ -39,16 +43,14 @@ namespace JIRC.Internal.Json
 
         internal static JiraVersion JiraVersionJsonParser(JsonObject json)
         {
-            return new JiraVersion
-            {
-                Archived = json.Get<bool>("archived"),
-                Description = json.Get("description"),
-                Id = json.Get<long>("id"),
-                Name = json.Get("name"),
-                ReleaseDate = json.Get<DateTimeOffset>("releaseDate"),
-                Released = json.Get<bool>("released"),
-                Self = json.Get<Uri>("self")
-            };
+            return new JiraVersion(
+                json.Get<Uri>("self"),
+                json.Get<long>("id"),
+                json.Get("name"),
+                json.Get("description"),
+                json.Get<bool>("archived"),
+                json.Get<bool>("released"),
+                json.Get<DateTimeOffset>("releaseDate"));
         }
 
         private static BasicUser BasicUserJsonParser(JsonObject json)
@@ -106,6 +108,34 @@ namespace JIRC.Internal.Json
                 json.Get<IEnumerable<Component>>("components"),
                 null,
                 json.Get<Dictionary<string, Uri>>("roles").ConvertAll(x => new BasicProjectRole { Name = x.Key, Self = x.Value }));
+        }
+
+        private static Watchers WatchersJsonParser(JsonObject json)
+        {
+            return new Watchers(json.Get<Uri>("self"), json.Get<bool>("isWatching"), json.Get<int>("watchCount"), json.Get<IEnumerable<BasicUser>>("watchers"));
+        }
+
+        private static SearchResult SearchResultJsonParser(JsonObject json)
+        {
+            return new SearchResult(
+                json.Get<int>("startAt"),
+                json.Get<int>("maxResults"),
+                json.Get<int>("total"),
+                json.ArrayObjects("issues").ConvertAll(IssueJsonParser.Parse));
+        }
+
+        private static Session SessionJsonParser(JsonObject json)
+        {
+            return new Session(json.Get<Uri>("self"), json.Get("name"), json.Get<LoginInfo>("loginInfo"));
+        }
+
+        private static LoginInfo LoginInfoJsonParser(JsonObject json)
+        {
+            return new LoginInfo(
+                json.Get<int>("failedLoginCount"),
+                json.Get<int>("loginCount"),
+                json.Get<DateTimeOffset>("lastFailedLoginTime"),
+                json.Get<DateTimeOffset>("previousLoginTime"));
         }
 
         internal static Component ComponentJsonParser(JsonObject json)

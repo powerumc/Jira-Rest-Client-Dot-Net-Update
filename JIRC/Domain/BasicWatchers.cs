@@ -1,13 +1,44 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BasicWatchers.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 
 namespace JIRC.Domain
 {
+    /// <summary>
+    /// Basic information about watchers of an issue.
+    /// </summary>
     public class BasicWatchers
     {
-        public Uri Self { get; set; }
+        /// <summary>
+        /// Creates a new instance of the watcher information.
+        /// </summary>
+        /// <param name="self">The URI for the watcher resource.</param>
+        /// <param name="isWatching">Whether or not anyone is watching the issue.</param>
+        /// <param name="count">The number of users watching the issue.</param>
+        protected BasicWatchers(Uri self, bool isWatching, int count)
+        {
+            Self = self;
+            IsWatching = isWatching;
+            Count = count;
+        }
 
-        public bool IsWatching { get; set; }
+        /// <summary>
+        /// Gets the URI of the watcher resource.
+        /// </summary>
+        public Uri Self { get; private set; }
 
-        public int Count { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether anyone is watching the issue.
+        /// </summary>
+        public bool IsWatching { get; private set; }
+
+        /// <summary>
+        /// Gets the number of users watching the issue.
+        /// </summary>
+        public int Count { get; private set; }
     }
 }

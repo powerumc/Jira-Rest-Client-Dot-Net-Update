@@ -12,7 +12,7 @@ namespace JIRC.Domain
     public class Project : BasicProject
     {
         // TODO: Expandos!
-        public Project(
+        internal Project(
             Uri self,
             string key,
             string name,

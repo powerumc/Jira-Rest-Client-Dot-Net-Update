@@ -10,10 +10,8 @@
 using System;
 
 using JIRC.Domain;
-using JIRC.Internal.Json;
 
 using ServiceStack.ServiceClient.Web;
-using ServiceStack.Text;
 
 namespace JIRC.Clients
 {
@@ -32,8 +30,7 @@ namespace JIRC.Clients
         public Session GetCurrentSession()
         {
             var uri = new Uri(serverUri, "/rest/auth/latest/session");
-            var json = client.Get<JsonObject>(uri.ToString());
-            return SessionJsonParser.Parse(json);
+            return client.Get<Session>(uri.ToString());
         }
     }
 }

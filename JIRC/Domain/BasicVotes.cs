@@ -19,7 +19,7 @@ namespace JIRC.Domain
         /// <param name="self">A URI resource for votes on the selected issue.</param>
         /// <param name="votes">The number of votes for the issue.</param>
         /// <param name="hasVoted">Whether or not a user has voted for the issue.</param>
-        public BasicVotes(Uri self, int votes, bool hasVoted)
+        internal BasicVotes(Uri self, int votes, bool hasVoted)
         {
             Self = self;
             Votes = votes;

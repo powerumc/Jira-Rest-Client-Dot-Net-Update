@@ -168,8 +168,7 @@ namespace JIRC.Clients
         /// <exception cref="WebServiceException">The requested watcher URI is not found, or the user does not have permission to view it.</exception>
         public Watchers GetWatchers(Uri watchersUri)
         {
-            var json = client.Get<JsonObject>(watchersUri.ToString());
-            return WatchersJsonParser.Parse(json);
+            return client.Get<Watchers>(watchersUri.ToString());
         }
 
         /// <summary>

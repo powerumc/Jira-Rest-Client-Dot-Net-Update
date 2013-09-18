@@ -32,19 +32,7 @@ namespace JIRC.Internal.Tests.Json
             var issueInput = IssueInput.CreateWithFields(fields);
             var expected = JsonResource.IssueInput_Valid;
 
-            var func = JsConfig<IssueInput>.OnSerializingFn;
-            if (func != null)
-            {
-                "Woo".PrintDump();
-            }
-
-            if (typeof(IssueInput) == typeof(object) || typeof(IssueInput).IsAbstract() || typeof(IssueInput).IsInterface())
-            {
-                "Foo".Print();
-            }
             var actual = IssueInputJsonGenerator.Generate(issueInput);
-
-            JsConfig<IssueInput>.HasSerializeFn.PrintDump();
 
             Assert.AreEqual(expected, actual.ToJson());
         }

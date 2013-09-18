@@ -12,7 +12,7 @@ namespace JIRC.Domain
 {
     public class User : BasicUser
     {
-        public User(Uri self, string name, string displayName, string emailAddress, IEnumerable<string> groups, IDictionary<string, Uri> avatarUris, bool active, string timezone)
+        internal User(Uri self, string name, string displayName, string emailAddress, IEnumerable<string> groups, IDictionary<string, Uri> avatarUris, bool active, string timezone)
             : base(self, name, displayName)
         {
             if (avatarUris == null)
