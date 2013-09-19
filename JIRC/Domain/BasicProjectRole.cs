@@ -8,10 +8,30 @@ using System;
 
 namespace JIRC.Domain
 {
+    /// <summary>
+    /// A simple representation of a way to group users.
+    /// </summary>
     public class BasicProjectRole
     {
-        public string Name { get; set; }
+        /// <summary>
+        /// Initializes a project role.
+        /// </summary>
+        /// <param name="self">The URI for us.</param>
+        /// <param name="name">The name of the project role.</param>
+        internal BasicProjectRole(Uri self, string name)
+        {
+            Name = name;
+            Self = self;
+        }
 
-        public Uri Self { get; set; }
+        /// <summary>
+        /// Gets the name of the project role.
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the URI for the project role resource.
+        /// </summary>
+        public Uri Self { get; private set; }
     }
 }

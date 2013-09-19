@@ -1,13 +1,44 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="VersionRelatedIssuesCount.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 
 namespace JIRC.Domain
 {
+    /// <summary>
+    /// Represents the number of issue which use the given version in the Fix Version(s) and Affects Version(s).
+    /// </summary>
     public class VersionRelatedIssuesCount
     {
-        public Uri VersionUrl { get; set; }
+        /// <summary>
+        /// Initializes the statistics.
+        /// </summary>
+        /// <param name="versionUri">The URI of the version resource.</param>
+        /// <param name="numFixedIssues">The number of issues with this version in the Fix Version(s).</param>
+        /// <param name="numAffectsIssues">The number of issues with this version in the Affects Version(s).</param>
+        internal VersionRelatedIssuesCount(Uri versionUri, int numFixedIssues, int numAffectsIssues)
+        {
+            VersionUrl = versionUri;
+            NumFixedIssues = numFixedIssues;
+            NumAffectedIssues = numAffectsIssues;
+        }
 
-        public int NumFixedIssues { get; set; }
+        /// <summary>
+        /// Gets the URI of the version resource.
+        /// </summary>
+        public Uri VersionUrl { get; private set; }
 
-        public int NumAffectedIssues { get; set; }
+        /// <summary>
+        /// Gets the number of issues that include this Fix Version.
+        /// </summary>
+        public int NumFixedIssues { get; private set; }
+
+        /// <summary>
+        /// Gets the number of issues that include this Affects Version.
+        /// </summary>
+        public int NumAffectedIssues { get; private set; }
     }
 }

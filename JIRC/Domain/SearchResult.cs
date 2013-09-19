@@ -20,7 +20,7 @@ namespace JIRC.Domain
         /// <param name="maxResults">The maximum number of results in a "page".</param>
         /// <param name="total">The total number of results in the query.</param>
         /// <param name="issues">The issues in the result set.</param>
-        internal SearchResult(int startIndex, int maxResults, int total, List<Issue> issues)
+        internal SearchResult(int startIndex, int maxResults, int total, IEnumerable<Issue> issues)
         {
             StartIndex = startIndex;
             MaxResults = maxResults;

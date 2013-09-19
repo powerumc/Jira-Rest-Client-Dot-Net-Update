@@ -29,6 +29,12 @@ namespace JIRC.Internal.Json
             JsConfig<SearchResult>.RawDeserializeFn = a => SearchResultJsonParser(JsonObject.Parse(a));
             JsConfig<Session>.RawDeserializeFn = a => SessionJsonParser(JsonObject.Parse(a));
             JsConfig<LoginInfo>.RawDeserializeFn = a => LoginInfoJsonParser(JsonObject.Parse(a));
+            JsConfig<Field>.RawDeserializeFn = a => FieldJsonParser(JsonObject.Parse(a));
+            JsConfig<BasicIssueType>.RawDeserializeFn = a => BasicIssueTypeJsonParser(JsonObject.Parse(a));
+            JsConfig<IssueType>.RawDeserializeFn = a => IssueTypeJsonParser(JsonObject.Parse(a));
+            JsConfig<CimIssueType>.RawDeserializeFn = a => CimIssueTypeJsonParser(JsonObject.Parse(a));
+            JsConfig<ProjectRole>.RawDeserializeFn = a => ProjectRoleJsonParser(JsonObject.Parse(a));
+            JsConfig<VersionRelatedIssuesCount>.RawDeserializeFn = a => VersionRelatedIssuesCountJsonParser(JsonObject.Parse(a));
         }
 
         internal static BasicResolution BasicResolutionJsonParser(JsonObject json)
@@ -67,6 +73,32 @@ namespace JIRC.Internal.Json
             return new User(basic, json.Get("emailAddress"), null, avatars, active, timezone);
         }
 
+        private static Field FieldJsonParser(JsonObject json)
+        {
+            var isCustom = json.Get<bool>("custom");
+            return new Field(
+                json.Get("id"),
+                json.Get("name"),
+                isCustom ? Field.Type.Custom : Field.Type.Jira,
+                json.Get<bool>("orderable"),
+                json.Get<bool>("navigable"),
+                json.Get<bool>("searchable"),
+                json.Get<FieldSchema>("schema"));
+        }
+
+        internal static BasicIssueType BasicIssueTypeJsonParser(JsonObject json)
+        {
+            return new BasicIssueType(json.Get<Uri>("self"), json.Get<long>("id"), json.Get("name"), json.Get<bool>("subtask"));
+        }
+
+        private static IssueType IssueTypeJsonParser(JsonObject json)
+        {
+            var basic = BasicIssueTypeJsonParser(json);
+            var iconUrl = json.Get<Uri>("iconUrl");
+            var description = json.Get("description");
+            return new IssueType(basic.Self, basic.Id, basic.Name, basic.Subtask, description, iconUrl);
+        }
+
         private static IEnumerable<IssueLinksType> IssueLinkTypesJsonParser(JsonObject json)
         {
             return json.Get<IEnumerable<IssueLinksType>>("issueLinkTypes");
@@ -77,10 +109,17 @@ namespace JIRC.Internal.Json
             return new BasicPriority(json.Get<Uri>("self"), json.Get<long>("id"), json.Get("name"));
         }
 
+        internal static CimIssueType CimIssueTypeJsonParser(JsonObject json)
+        {
+            var issueType = IssueTypeJsonParser(json);
+            var fields = json.Get<Dictionary<string, JsonObject>>("fields");
+            return new CimIssueType(issueType.Self, issueType.Id, issueType.Name, issueType.Subtask, issueType.Description, issueType.IconUrl, CimFieldsInfoMapJsonParser.Parse(fields));
+        }
+
         private static CimProject CimProjectJsonParser(JsonObject json)
         {
             var basicProject = BasicProjectJsonParser(json);
-            var issueTypes = json.ArrayObjects("issuetypes").ConvertAll(CimIssueTypeJsonParser.Parse);
+            var issueTypes = json.Get<IEnumerable<CimIssueType>>("issuetypes");
             var avatarUris = json.Get<Dictionary<string, Uri>>("avatarUrls");
             return new CimProject(basicProject.Self, basicProject.Key, basicProject.Name, avatarUris, issueTypes);
         }
@@ -107,7 +146,12 @@ namespace JIRC.Internal.Json
                 json.Get<IEnumerable<JiraVersion>>("versions"),
                 json.Get<IEnumerable<Component>>("components"),
                 null,
-                json.Get<Dictionary<string, Uri>>("roles").ConvertAll(x => new BasicProjectRole { Name = x.Key, Self = x.Value }));
+                json.Get<Dictionary<string, Uri>>("roles").ConvertAll(x => new BasicProjectRole(x.Value, x.Key)));
+        }
+
+        private static ProjectRole ProjectRoleJsonParser(JsonObject json)
+        {
+            return new ProjectRole(json.Get<long>("id"), json.Get<Uri>("self"), json.Get("name"), json.Get("description"), json.Get<IEnumerable<RoleActor>>("actors"));
         }
 
         private static Watchers WatchersJsonParser(JsonObject json)
@@ -155,6 +199,11 @@ namespace JIRC.Internal.Json
             }
 
             return new Component(json.Get<Uri>("self"), json.Get<long>("id"), json.Get("name"), json.Get("description"), json.Get<BasicUser>("lead"), assignee);
+        }
+
+        private static VersionRelatedIssuesCount VersionRelatedIssuesCountJsonParser(JsonObject json)
+        {
+            return new VersionRelatedIssuesCount(json.Get<Uri>("self"), json.Get<int>("issuesFixedCount"), json.Get<int>("issuesAffectedCount"));
         }
 
         private static AssigneeType ParseAssigneeType(string str)

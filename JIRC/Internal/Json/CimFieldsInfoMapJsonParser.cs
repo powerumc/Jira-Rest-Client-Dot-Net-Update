@@ -13,7 +13,7 @@ namespace JIRC.Internal.Json
         {
             { "project", CustomJsonSerializer.BasicProjectJsonParser },
             { "version", CustomJsonSerializer.JiraVersionJsonParser },
-            { "issuetype", BasicIssueTypeJsonParser.Parse },
+            { "issuetype", CustomJsonSerializer.BasicIssueTypeJsonParser },
             { "priority", CustomJsonSerializer.BasicPriorityJsonParser },
             //{ "customFieldOption", CustomFieldOptionJsonParser.Parse },
             { "component", CustomJsonSerializer.ComponentJsonParser },

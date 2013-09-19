@@ -1,23 +1,47 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CimIssueType.cs" company="David Bevin">
+//   Copyright (c) David Bevin.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 
 namespace JIRC.Domain
 {
+    /// <summary>
+    /// Describes issue type fields with fields info map.
+    /// The CIM prefix stands for CreateIssueMetadata, as this class is used in output of <see cref="IIssueRestClient.GetCreateIssueMetadata()"/>.
+    /// </summary>
     public class CimIssueType : IssueType
     {
-        public CimIssueType(Uri self, long? id, string name, bool isSubtask, string description, Uri iconUrl, Dictionary<string, CimFieldInfo> fields)
+        private readonly Dictionary<string, CimFieldInfo> fields;
+
+        /// <summary>
+        /// Initializes the Create Issue Metadata issue type.
+        /// </summary>
+        /// <param name="self">The URI resource for us.</param>
+        /// <param name="id">The issue type unique ID.</param>
+        /// <param name="name">The name of the issue type.</param>
+        /// <param name="isSubtask">Whether or not this is a subtask.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="iconUrl">The URI for the icon resource associated with this issue type.</param>
+        /// <param name="fields">The fields for the issue type.</param>
+        internal CimIssueType(Uri self, long? id, string name, bool isSubtask, string description, Uri iconUrl, Dictionary<string, CimFieldInfo> fields)
             : base(self, id, name, isSubtask, description, iconUrl)
         {
-            Fields = fields;
+            this.fields = fields ?? new Dictionary<string, CimFieldInfo>();
         }
 
-        public Dictionary<string, CimFieldInfo> Fields { get; private set; }
-
-        public CimFieldInfo GetField(IssueFieldId fieldId)
+        /// <summary>
+        /// Gets the available fields for this issue type.
+        /// </summary>
+        public IEnumerable<CimFieldInfo> Fields
         {
-            CimFieldInfo info;
-            Fields.TryGetValue(fieldId.ToRestString(), out info);
-            return info;
+            get
+            {
+                return fields.Values;
+            }
         }
     }
 }

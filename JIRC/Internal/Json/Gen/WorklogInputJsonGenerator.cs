@@ -29,7 +29,8 @@ namespace JIRC.Internal.Json.Gen
 
             if (worklogInput.UpdateAuthor != null)
             {
-                json.Add("updateAuthor", BasicUserJsonGenerator.Generate(worklogInput.UpdateAuthor).ToString());
+                //json.Add("updateAuthor", BasicUserJsonGenerator.Generate(worklogInput.UpdateAuthor).ToString());
+               json.Add("updateAuthor",  worklogInput.UpdateAuthor.ToJson());
             }
 
             return json;

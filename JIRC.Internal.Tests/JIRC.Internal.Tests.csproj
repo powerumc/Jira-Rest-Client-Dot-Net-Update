@@ -55,6 +55,7 @@
       <DependentUpon>JsonResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Json\IssueInputJsonGeneratorTest.cs" />
+    <Compile Include="Json\IssueJsonParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

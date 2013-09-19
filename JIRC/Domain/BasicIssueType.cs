@@ -8,9 +8,19 @@ using System;
 
 namespace JIRC.Domain
 {
+    /// <summary>
+    /// Basic information about an issue type.
+    /// </summary>
     public class BasicIssueType
     {
-        public BasicIssueType(Uri self, long? id, string name, bool isSubtask)
+        /// <summary>
+        /// Initializes the basic issue type information.
+        /// </summary>
+        /// <param name="self">The URI resource for us.</param>
+        /// <param name="id">The issue type unique ID.</param>
+        /// <param name="name">The name of the issue type.</param>
+        /// <param name="isSubtask">Whether or not this is a subtask.</param>
+        internal BasicIssueType(Uri self, long? id, string name, bool isSubtask)
         {
             Self = self;
             Id = id;
@@ -18,12 +28,24 @@ namespace JIRC.Domain
             Subtask = isSubtask;
         }
 
-        public Uri Self { get; set; }
+        /// <summary>
+        /// Gets our URI resource.
+        /// </summary>
+        public Uri Self { get; private set; }
 
-        public long? Id { get; set; }
+        /// <summary>
+        /// Gets the unique ID for the issue type.
+        /// </summary>
+        public long? Id { get; private set; }
 
-        public string Name { get; set; }
+        /// <summary>
+        /// Gets the name of the issue type.
+        /// </summary>
+        public string Name { get; private set; }
 
-        public bool Subtask { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether this is a subtask.
+        /// </summary>
+        public bool Subtask { get; private set; }
     }
 }

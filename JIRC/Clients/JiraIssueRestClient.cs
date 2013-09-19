@@ -118,7 +118,7 @@ namespace JIRC.Clients
             }
 
             var json = client.Get<JsonObject>(qb.Uri.ToString());
-            return CreateIssueMetadataJsonParser.Parse(json);
+            return json.Get<IEnumerable<CimProject>>("projects");
         }
 
         /// <summary>
