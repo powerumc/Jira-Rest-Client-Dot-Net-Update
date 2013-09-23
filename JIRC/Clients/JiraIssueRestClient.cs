@@ -141,8 +141,7 @@ namespace JIRC.Clients
         /// <exception cref="WebServiceException">The requested issue is not found, or the user does not have permission to view it.</exception>
         public Issue GetIssue(string key)
         {
-            var json = client.Get<JsonObject>("/{0}/{1}".Fmt(IssuesUriPrefix, key));
-            return IssueJsonParser.Parse(json);
+            return client.Get<Issue>("/{0}/{1}".Fmt(IssuesUriPrefix, key));
         }
 
         /// <summary>

@@ -8,10 +8,8 @@ using System;
 using System.Collections.Generic;
 
 using JIRC.Domain;
-using JIRC.Internal.Json;
 
 using ServiceStack.ServiceClient.Web;
-using ServiceStack.Text;
 
 namespace JIRC.Clients
 {
