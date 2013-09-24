@@ -41,11 +41,16 @@
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>
         </Rule>
+        <Rule Name="SingleLineCommentsMustNotUseDocumentationStyleSlashes">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
       </Rules>
       <AnalyzerSettings>
         <BooleanProperty Name="IgnorePrivates">True</BooleanProperty>
         <StringProperty Name="CompanyName">David Bevin</StringProperty>
-        <StringProperty Name="Copyright">Copyright (c) David Bevin.</StringProperty>
+        <StringProperty Name="Copyright">Copyright (c) 2013 David Bevin.</StringProperty>
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.ReadabilityRules">
