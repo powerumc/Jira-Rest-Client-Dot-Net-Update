@@ -452,8 +452,13 @@
 	<s:Boolean x:Key="/Default/CodeStyle/CSharpUsing/QualifiedUsingAtNestedScope/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">//-----------------------------------------------------------------------&#xD;
 // &lt;copyright file="$FILENAME$" company="David Bevin"&gt;&#xD;
-//     Copyright (c) David Bevin.&#xD;
+//     Copyright (c) 2013 David Bevin.&#xD;
 // &lt;/copyright&gt;&#xD;
+// &lt;summary&gt;&#xD;
+//     https://bitbucket.org/dpbevin/jira-rest-client-dot-net&#xD;
+//&#xD;
+//     Licensed under the BSD 2-Clause License.&#xD;
+//  &lt;/summary&gt;&#xD;
 //-----------------------------------------------------------------------&#xD;
 &#xD;
 </s:String>
