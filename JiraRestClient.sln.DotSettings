@@ -461,7 +461,6 @@
 //     Licensed under the BSD 2-Clause License.&#xD;
 //  &lt;/summary&gt;&#xD;
 //-----------------------------------------------------------------------&#xD;
-&#xD;
 </s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/Generate/=Constructor/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Generate/=Constructor/Options/=XmlDocumentation/@EntryIndexedValue">False</s:String>
