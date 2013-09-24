@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 using JIRC.Domain;
 using JIRC.Extensions;
@@ -37,6 +38,7 @@ namespace JIRC.Internal.Json
             JsConfig<ProjectRole>.RawDeserializeFn = a => ProjectRoleJsonParser(JsonObject.Parse(a));
             JsConfig<VersionRelatedIssuesCount>.RawDeserializeFn = a => VersionRelatedIssuesCountJsonParser(JsonObject.Parse(a));
             JsConfig<Issue>.RawDeserializeFn = a => IssueJsonParser(JsonObject.Parse(a));
+            JsConfig<Attachment>.RawDeserializeFn = a => AttachmentJsonParser(JsonObject.Parse(a));
         }
 
         internal static BasicResolution BasicResolutionJsonParser(JsonObject json)
@@ -233,12 +235,26 @@ namespace JIRC.Internal.Json
                 issue.AffectedVersions = fields.Get<IEnumerable<JiraVersion>>("versions");
                 issue.Watchers = fields.Get<BasicWatchers>("watches");
                 issue.Votes = fields.Get<BasicVotes>("votes");
+                issue.Attachments = fields.Get<IEnumerable<Attachment>>("attachment");
             }
 
             return issue;
         }
 
-        internal static AssigneeType ParseAssigneeType(string str)
+        internal static Attachment AttachmentJsonParser(JsonObject json)
+        {
+            return new Attachment(
+                json.Get<Uri>("self"),
+                json.Get("filename"),
+                json.Get<BasicUser>("author"),
+                json.Get<DateTimeOffset>("created"),
+                json.Get<int>("size"),
+                json.Get("mimeType"),
+                json.Get<Uri>("content"),
+                json.Get<Uri>("thumbnail"));
+        }
+
+        private static AssigneeType ParseAssigneeType(string str)
         {
             if (str == "COMPONENT_LEAD")
             {

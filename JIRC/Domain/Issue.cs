@@ -13,8 +13,10 @@ namespace JIRC.Domain
 {
     public class Issue : BasicIssue
     {
-        public IEnumerable<JiraVersion> AffectedVersions { get; set; }
-        public User Assignee { get; set; }
+        public Issue()
+        {
+            Attachments = new Attachment[0];
+        }
 
         public Uri CommentsUri
         {
@@ -36,5 +38,8 @@ namespace JIRC.Domain
         public BasicWatchers Watchers { get; set; }
 
         public BasicVotes Votes { get; set; }
+        public IEnumerable<JiraVersion> AffectedVersions { get; set; }
+        public User Assignee { get; set; }
+        public IEnumerable<Attachment> Attachments { get; internal set; }
     }
 }
