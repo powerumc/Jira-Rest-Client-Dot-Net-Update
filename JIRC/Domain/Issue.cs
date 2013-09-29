@@ -39,6 +39,22 @@ namespace JIRC.Domain
         public string Summary { get; set; }
         public Uri TransitionsUri { get; internal set; }
 
+        public Uri AttachmentsUri
+        {
+            get
+            {
+                return Self.Append("attachments");
+            }
+        }
+
+        public Uri WorklogUri
+        {
+            get
+            {
+                return Self.Append("worklog");
+            }
+        }
+
         public BasicWatchers Watchers { get; set; }
 
         public BasicVotes Votes { get; set; }

@@ -190,11 +190,12 @@ namespace JIRC
         /// <exception cref="WebServiceException">If there was a problem linking the issues, or the the calling user does not have permission to link issues.</exception>
         void LinkIssue(LinkIssuesInput linkIssuesInput);
 
-        // void AddAttachment(Uri attachmentsUri, Stream in, string filename);
-
-        // void AddAttachments(Uri attachmentsUri, params AttachmentInput[] attachments);
-
-        // void AddAttachments(Uri attachmentsUri, params File[] files);
+        /// <summary>
+        /// Adds an attachement to an issue.
+        /// </summary>
+        /// <param name="attachmentsUri">The URI of the attachment resource for a given issue.</param>
+        /// <param name="filename">The name of the file to attach.</param>
+        void AddAttachment(Uri attachmentsUri, string filename);
 
         /// <summary>
         /// Adds a comment to the specified issue.
@@ -211,8 +212,6 @@ namespace JIRC
         /// <param name="comment">The comment to add to the issue.</param>
         /// <exception cref="WebServiceException">If the issue does not exist, or the the calling user does not have permission to comment on the issue.</exception>
         void AddComment(Uri commentsUri, Comment comment);
-
-        // Stream GetAttachment(Uri attachmentUri);
 
         /// <summary>
         /// Adds a new work log entry to issue.

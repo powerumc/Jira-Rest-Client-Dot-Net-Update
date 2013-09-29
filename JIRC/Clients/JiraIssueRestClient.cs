@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using JIRC.Domain;
@@ -18,6 +19,7 @@ using JIRC.Extensions;
 using JIRC.Internal.Json;
 using JIRC.Internal.Json.Gen;
 
+using ServiceStack.Common.Web;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.Text;
 
@@ -357,6 +359,20 @@ namespace JIRC.Clients
         public void LinkIssue(LinkIssuesInput linkIssuesInput)
         {
             client.Post<JsonObject>("issueLink", LinkIssuesInputJsonGenerator.Generate(linkIssuesInput, GetServerInfo()));
+        }
+
+        /// <summary>
+        /// Adds an attachement to an issue.
+        /// </summary>
+        /// <param name="attachmentsUri">The URI of the attachment resource for a given issue.</param>
+        /// <param name="filename">The name of the file to attach.</param>
+        public void AddAttachment(Uri attachmentsUri, string filename)
+        {
+            var fileInfo = new FileInfo(filename);
+
+            client.Headers.Add("X-Atlassian-Token", "nocheck");
+            client.PostFile<JsonObject>(attachmentsUri.ToString(), fileInfo, MimeTypes.GetMimeType(fileInfo.Name));
+            client.Headers.Remove("X-Atlassian-Token");
         }
 
         /// <summary>
