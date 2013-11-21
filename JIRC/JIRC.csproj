@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Domain\Attachment.cs" />
     <Compile Include="Domain\AvatarSizes.cs" />
+    <Compile Include="Domain\Input\FieldUpdateElement.cs" />
     <Compile Include="Domain\Input\GetCreateIssueMetadataOptionsBuilder.cs" />
     <Compile Include="Clients\JiraComponentRestClient.cs" />
     <Compile Include="Clients\JiraIssueRestClient.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Domain\Input\IssueInput.cs" />
     <Compile Include="Domain\Input\IssueInputBuilder.cs" />
     <Compile Include="Domain\Input\LinkIssuesInput.cs" />
+    <Compile Include="Domain\Input\UpdateFieldInput.cs" />
     <Compile Include="Domain\Input\VersionInput.cs" />
     <Compile Include="Domain\Input\VersionPosition.cs" />
     <Compile Include="Domain\Input\WorklogInput.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Internal\Json\Gen\CommentJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\ComplexIssueInputFieldValueJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\ComponentInputWithProjectKeyJsonGenerator.cs" />
+    <Compile Include="Internal\Json\Gen\IssueEditMetaJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\IssueInputJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\IssuesInputJsonGenerator.cs" />
     <Compile Include="Internal\Json\Gen\IssueUpdateJsonGenerator.cs" />

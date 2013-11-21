@@ -191,7 +191,7 @@ namespace JIRC
         void LinkIssue(LinkIssuesInput linkIssuesInput);
 
         /// <summary>
-        /// Adds an attachement to an issue.
+        /// Adds an attachment to an issue.
         /// </summary>
         /// <param name="attachmentsUri">The URI of the attachment resource for a given issue.</param>
         /// <param name="filename">The name of the file to attach.</param>
@@ -220,5 +220,19 @@ namespace JIRC
         /// <param name="worklogInput">The work log information to add to the issue.</param>
         /// <exception cref="WebServiceException">If the issue does not exist, or the the calling user does not have permission to add work log information to the issue.</exception>
         void AddWorklog(Uri worklogUri, WorklogInput worklogInput);
+
+        /// <summary>
+        /// Adds a label to an issue.
+        /// </summary>
+        /// <param name="issue">The issue to add the label to.</param>
+        /// <param name="label">The label to add.</param>
+        void AddLabel(Issue issue, string label);
+
+        /// <summary>
+        /// Removes a label from an issue.
+        /// </summary>
+        /// <param name="issue">The issue to remove the label from.</param>
+        /// <param name="label">The label to remove.</param>
+        void RemoveLabel(Issue issue, string label);
     }
 }

@@ -34,6 +34,8 @@ namespace JIRC.Clients
 
         private const string CommentUriPostfix = "comment";
 
+        private const string EditMetaUriPostfix = "editmeta";
+
         private readonly JsonServiceClient client;
 
         private readonly IMetadataRestClient metadataClient;
@@ -66,7 +68,6 @@ namespace JIRC.Clients
         public BasicIssue CreateIssue(IssueInput issue)
         {
             var json = IssueInputJsonGenerator.Generate(issue);
-            json.PrintDump();
             return client.Post<BasicIssue>("issue", json);
         }
 
@@ -362,7 +363,7 @@ namespace JIRC.Clients
         }
 
         /// <summary>
-        /// Adds an attachement to an issue.
+        /// Adds an attachment to an issue.
         /// </summary>
         /// <param name="attachmentsUri">The URI of the attachment resource for a given issue.</param>
         /// <param name="filename">The name of the file to attach.</param>
@@ -397,8 +398,7 @@ namespace JIRC.Clients
         public void AddComment(Uri commentsUri, Comment comment)
         {
             var request = CommentJsonGenerator.Generate(comment, GetServerInfo());
-            var response = client.Post<Comment>(commentsUri.ToString(), request);
-            response.PrintDump();
+            client.Post<Comment>(commentsUri.ToString(), request);
         }
 
         /// <summary>
@@ -424,6 +424,38 @@ namespace JIRC.Clients
             }
 
             client.Post<JsonObject>(qb.Uri.ToString(), WorklogInputJsonGenerator.Generate(worklogInput));
+        }
+
+        /// <summary>
+        /// Adds a label to an issue.
+        /// </summary>
+        /// <param name="issue">The issue to add the label to.</param>
+        /// <param name="label">The label to add.</param>
+        public void AddLabel(Issue issue, string label)
+        {
+            var uri = issue.Self;
+
+            var update = new UpdateFieldInput(IssueFieldId.Labels);
+            update.AddOperation(StandardOperation.Add, label);
+
+            var json = IssueEditMetaJsonGenerator.Generate(new List<UpdateFieldInput> { update });
+            client.Put<JsonObject>(uri.ToString(), json);
+        }
+
+        /// <summary>
+        /// Removes a label from an issue.
+        /// </summary>
+        /// <param name="issue">The issue to remove the label from.</param>
+        /// <param name="label">The label to remove.</param>
+        public void RemoveLabel(Issue issue, string label)
+        {
+            var uri = issue.Self;
+
+            var update = new UpdateFieldInput(IssueFieldId.Labels);
+            update.AddOperation(StandardOperation.Remove, label);
+
+            var json = IssueEditMetaJsonGenerator.Generate(new List<UpdateFieldInput> { update });
+            client.Put<JsonObject>(uri.ToString(), json);
         }
 
         private ServerInfo GetServerInfo()

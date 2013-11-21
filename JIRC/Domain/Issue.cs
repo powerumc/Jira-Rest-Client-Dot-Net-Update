@@ -15,13 +15,33 @@ using JIRC.Extensions;
 
 namespace JIRC.Domain
 {
+    /// <summary>
+    /// A detailed representation of an Issue.
+    /// </summary>
     public class Issue : BasicIssue
     {
-        public Issue()
+        /// <summary>
+        /// Initializes a new instance of an issue.
+        /// </summary>
+        /// <param name="id">The id of the issue.</param>
+        /// <param name="key">The key (e.g. DEMO-8).</param>
+        /// <param name="self">The URI for the issue itself.</param>
+        internal Issue(int id, string key, Uri self)
         {
+            if (self == null)
+            {
+                throw new ArgumentNullException("self");
+            }
+
             Attachments = new Attachment[0];
+            Id = id;
+            Key = key;
+            Self = self;
         }
 
+        /// <summary>
+        /// Gets the URI for the comments resource.
+        /// </summary>
         public Uri CommentsUri
         {
             get
@@ -30,15 +50,39 @@ namespace JIRC.Domain
             }
         }
 
-        public string Description { get; set; }
-        public IEnumerable<JiraVersion> FixVersions { get; set; }
+        /// <summary>
+        /// Gets the description.
+        /// </summary>
+        public string Description { get; internal set; }
 
-        public BasicProject Project { get; set; }
+        /// <summary>
+        /// Gets the Fix Versions.
+        /// </summary>
+        public IEnumerable<JiraVersion> FixVersions { get; internal set; }
 
-        public User Reporter { get; set; }
-        public string Summary { get; set; }
+        /// <summary>
+        /// Gets the project.
+        /// </summary>
+        public BasicProject Project { get; internal set; }
+
+        /// <summary>
+        /// Gets the reporter of the issue.
+        /// </summary>
+        public User Reporter { get; internal set; }
+
+        /// <summary>
+        /// Gets the issue summary.
+        /// </summary>
+        public string Summary { get; internal set; }
+
+        /// <summary>
+        /// Gets the URI for the transitions resource.
+        /// </summary>
         public Uri TransitionsUri { get; internal set; }
 
+        /// <summary>
+        /// Gets the URI for the transitions resource.
+        /// </summary>
         public Uri AttachmentsUri
         {
             get
@@ -47,6 +91,9 @@ namespace JIRC.Domain
             }
         }
 
+        /// <summary>
+        /// Gets the URI for the transitions resource.
+        /// </summary>
         public Uri WorklogUri
         {
             get
@@ -55,11 +102,34 @@ namespace JIRC.Domain
             }
         }
 
-        public BasicWatchers Watchers { get; set; }
+        /// <summary>
+        /// Gets the watchers of the issue.
+        /// </summary>
+        public BasicWatchers Watchers { get; internal set; }
 
-        public BasicVotes Votes { get; set; }
-        public IEnumerable<JiraVersion> AffectedVersions { get; set; }
-        public User Assignee { get; set; }
+        /// <summary>
+        /// Gets the voters of the issue.
+        /// </summary>
+        public BasicVotes Votes { get; internal set; }
+
+        /// <summary>
+        /// Gets the Affects Version for the issue.
+        /// </summary>
+        public IEnumerable<JiraVersion> AffectedVersions { get; internal set; }
+
+        /// <summary>
+        /// Gets the assignee of the issue.
+        /// </summary>
+        public User Assignee { get; internal set; }
+
+        /// <summary>
+        /// Gets the attachments for the issue.
+        /// </summary>
         public IEnumerable<Attachment> Attachments { get; internal set; }
+
+        /// <summary>
+        /// Gets the labels for the issue.
+        /// </summary>
+        public IEnumerable<string> Labels { get; internal set; }
     }
 }
