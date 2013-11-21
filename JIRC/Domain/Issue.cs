@@ -61,5 +61,7 @@ namespace JIRC.Domain
         public IEnumerable<JiraVersion> AffectedVersions { get; set; }
         public User Assignee { get; set; }
         public IEnumerable<Attachment> Attachments { get; internal set; }
+
+        public IEnumerable<string> Labels { get; set; }
     }
 }

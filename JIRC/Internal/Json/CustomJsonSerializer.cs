@@ -10,7 +10,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 using JIRC.Domain;
 using JIRC.Extensions;
@@ -49,6 +48,7 @@ namespace JIRC.Internal.Json
             JsConfig<VersionRelatedIssuesCount>.RawDeserializeFn = a => VersionRelatedIssuesCountJsonParser(JsonObject.Parse(a));
             JsConfig<Issue>.RawDeserializeFn = a => IssueJsonParser(JsonObject.Parse(a));
             JsConfig<Attachment>.RawDeserializeFn = a => AttachmentJsonParser(JsonObject.Parse(a));
+            JsConfig<IssueLinksType>.RawDeserializeFn = a => IssueLinksTypesJsonParser(JsonObject.Parse(a));
         }
 
         internal static BasicResolution BasicResolutionJsonParser(JsonObject json)
@@ -115,7 +115,13 @@ namespace JIRC.Internal.Json
 
         internal static IEnumerable<IssueLinksType> IssueLinkTypesJsonParser(JsonObject json)
         {
-            return json.Get<IEnumerable<IssueLinksType>>("issueLinkTypes");
+            var allTypes = json.Get<JsonArrayObjects>("issueLinkTypes");
+            return allTypes.ConvertAll(IssueLinksTypesJsonParser);
+        }
+
+        internal static IssueLinksType IssueLinksTypesJsonParser(JsonObject json)
+        {
+            return new IssueLinksType(json.Get<Uri>("self"), json.Get("id"), json.Get("name"), json.Get("inward"), json.Get("outward"));
         }
 
         internal static BasicPriority BasicPriorityJsonParser(JsonObject json)
@@ -246,6 +252,7 @@ namespace JIRC.Internal.Json
                 issue.Watchers = fields.Get<BasicWatchers>("watches");
                 issue.Votes = fields.Get<BasicVotes>("votes");
                 issue.Attachments = fields.Get<IEnumerable<Attachment>>("attachment");
+                issue.Labels = fields.Get<IEnumerable<string>>("labels");
             }
 
             return issue;

@@ -34,6 +34,8 @@ namespace JIRC.Clients
 
         private const string CommentUriPostfix = "comment";
 
+        private const string EditMetaUriPostfix = "editmeta";
+
         private readonly JsonServiceClient client;
 
         private readonly IMetadataRestClient metadataClient;
@@ -424,6 +426,26 @@ namespace JIRC.Clients
             }
 
             client.Post<JsonObject>(qb.Uri.ToString(), WorklogInputJsonGenerator.Generate(worklogInput));
+        }
+
+        /// <summary>
+        /// Adds a label to an issue.
+        /// </summary>
+        /// <param name="issue">The issue to add the label to.</param>
+        /// <param name="label">The label to add.</param>
+        public void AddLabel(Issue issue, string label)
+        {
+	        var uri = issue.Self.Append(EditMetaUriPostfix);
+        }
+
+        /// <summary>
+        /// Removes a label from an issue.
+        /// </summary>
+        /// <param name="issue">The issue to remove the label from.</param>
+        /// <param name="label">The label to remove.</param>
+        public void RemoveLabel(Issue issue, string label)
+        {
+            throw new NotImplementedException();
         }
 
         private ServerInfo GetServerInfo()
