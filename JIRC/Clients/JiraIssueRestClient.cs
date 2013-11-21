@@ -433,13 +433,21 @@ namespace JIRC.Clients
         /// <param name="label">The label to add.</param>
         public void AddLabel(Issue issue, string label)
         {
-            var uri = issue.Self;
+            if (issue == null)
+            {
+                throw new ArgumentNullException("issue");
+            }
+
+            if (string.IsNullOrWhiteSpace(label))
+            {
+                throw new ArgumentException("Label cannot be empty", "label");
+            }
 
             var update = new UpdateFieldInput(IssueFieldId.Labels);
             update.AddOperation(StandardOperation.Add, label);
 
             var json = IssueEditMetaJsonGenerator.Generate(new List<UpdateFieldInput> { update });
-            client.Put<JsonObject>(uri.ToString(), json);
+            client.Put<JsonObject>(issue.Self.ToString(), json);
         }
 
         /// <summary>
@@ -449,13 +457,21 @@ namespace JIRC.Clients
         /// <param name="label">The label to remove.</param>
         public void RemoveLabel(Issue issue, string label)
         {
-            var uri = issue.Self;
+            if (issue == null)
+            {
+                throw new ArgumentNullException("issue");
+            }
+
+            if (string.IsNullOrWhiteSpace(label))
+            {
+                throw new ArgumentException("Label cannot be empty", "label");
+            }
 
             var update = new UpdateFieldInput(IssueFieldId.Labels);
             update.AddOperation(StandardOperation.Remove, label);
 
             var json = IssueEditMetaJsonGenerator.Generate(new List<UpdateFieldInput> { update });
-            client.Put<JsonObject>(uri.ToString(), json);
+            client.Put<JsonObject>(issue.Self.ToString(), json);
         }
 
         private ServerInfo GetServerInfo()
