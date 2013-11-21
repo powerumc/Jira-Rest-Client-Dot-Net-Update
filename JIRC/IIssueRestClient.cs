@@ -191,7 +191,7 @@ namespace JIRC
         void LinkIssue(LinkIssuesInput linkIssuesInput);
 
         /// <summary>
-        /// Adds an attachement to an issue.
+        /// Adds an attachment to an issue.
         /// </summary>
         /// <param name="attachmentsUri">The URI of the attachment resource for a given issue.</param>
         /// <param name="filename">The name of the file to attach.</param>

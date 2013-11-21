@@ -68,7 +68,6 @@ namespace JIRC.Clients
         public BasicIssue CreateIssue(IssueInput issue)
         {
             var json = IssueInputJsonGenerator.Generate(issue);
-            json.PrintDump();
             return client.Post<BasicIssue>("issue", json);
         }
 
@@ -364,7 +363,7 @@ namespace JIRC.Clients
         }
 
         /// <summary>
-        /// Adds an attachement to an issue.
+        /// Adds an attachment to an issue.
         /// </summary>
         /// <param name="attachmentsUri">The URI of the attachment resource for a given issue.</param>
         /// <param name="filename">The name of the file to attach.</param>
@@ -399,8 +398,7 @@ namespace JIRC.Clients
         public void AddComment(Uri commentsUri, Comment comment)
         {
             var request = CommentJsonGenerator.Generate(comment, GetServerInfo());
-            var response = client.Post<Comment>(commentsUri.ToString(), request);
-            response.PrintDump();
+            client.Post<Comment>(commentsUri.ToString(), request);
         }
 
         /// <summary>
@@ -435,7 +433,13 @@ namespace JIRC.Clients
         /// <param name="label">The label to add.</param>
         public void AddLabel(Issue issue, string label)
         {
-	        var uri = issue.Self.Append(EditMetaUriPostfix);
+            var uri = issue.Self;
+
+            var update = new UpdateFieldInput(IssueFieldId.Labels);
+            update.AddOperation(StandardOperation.Add, label);
+
+            var json = IssueEditMetaJsonGenerator.Generate(new List<UpdateFieldInput> { update });
+            client.Put<JsonObject>(uri.ToString(), json);
         }
 
         /// <summary>
@@ -445,7 +449,13 @@ namespace JIRC.Clients
         /// <param name="label">The label to remove.</param>
         public void RemoveLabel(Issue issue, string label)
         {
-            throw new NotImplementedException();
+            var uri = issue.Self;
+
+            var update = new UpdateFieldInput(IssueFieldId.Labels);
+            update.AddOperation(StandardOperation.Remove, label);
+
+            var json = IssueEditMetaJsonGenerator.Generate(new List<UpdateFieldInput> { update });
+            client.Put<JsonObject>(uri.ToString(), json);
         }
 
         private ServerInfo GetServerInfo()

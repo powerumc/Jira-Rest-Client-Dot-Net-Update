@@ -228,7 +228,7 @@ namespace JIRC.Internal.Json
 
         internal static Issue IssueJsonParser(JsonObject json)
         {
-            var issue = new Issue { Id = json.Get<int>("id"), Key = json.Get<string>("key"), Self = json.Get<Uri>("self") };
+            var issue = new Issue(json.Get<int>("id"), json.Get<string>("key"), json.Get<Uri>("self"));
             var fields = json.Get<JsonObject>("fields");
             if (fields != null)
             {

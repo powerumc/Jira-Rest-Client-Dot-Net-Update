@@ -14,7 +14,7 @@ namespace JIRC.Domain
 {
     public class IssueLinksType : AddressableNamedEntity
     {
-        public IssueLinksType(Uri self, string id, string name, string inward, string outward)
+        internal IssueLinksType(Uri self, string id, string name, string inward, string outward)
             : base(self, name)
         {
             Id = id;
