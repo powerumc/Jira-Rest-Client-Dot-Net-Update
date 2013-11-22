@@ -14,9 +14,7 @@ using System.Linq;
 
 using JIRC.Domain;
 using JIRC.Extensions;
-using JIRC.Internal.Json;
 
-using ServiceStack.Common.Extensions;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.Text;
 
@@ -75,6 +73,38 @@ namespace JIRC.Clients
             var uri = projectUri.Append(ProjectRoleUriPostfix);
             var json = client.Get<Dictionary<string, Uri>>(uri.ToString());
             return json.Values.Select(b => GetRole(b)).ToList();
+        }
+
+        /// <summary>
+        /// Adds a group to a specific role in the project.
+        /// </summary>
+        /// <param name="projectUri">The URI of the project resource.</param>
+        /// <param name="roleId">The ID of the project role.</param>
+        /// <param name="userName">The name of the user to add.</param>
+        /// <returns>Detailed information about the selected role.</returns>
+        public ProjectRole AddUserToRole(Uri projectUri, int roleId, string userName)
+        {
+            return this.AddActorToRole(projectUri, roleId, "user", userName);
+        }
+
+        /// <summary>
+        /// Adds a group to a specific role in the project.
+        /// </summary>
+        /// <param name="projectUri">The URI of the project resource.</param>
+        /// <param name="roleId">The ID of the project role.</param>
+        /// <param name="groupName">The name of the group to add.</param>
+        /// <returns>Detailed information about the selected role.</returns>
+        public ProjectRole AddGroupToRole(Uri projectUri, int roleId, string groupName)
+        {
+            return this.AddActorToRole(projectUri, roleId, "group", groupName);
+        }
+
+        private ProjectRole AddActorToRole(Uri projectUri, int roleId, string actorType, string actorName)
+        {
+            var uri = projectUri.Append(ProjectRoleUriPostfix).Append(roleId.ToString());
+            var actors = new List<string> { actorName };
+            var request = new JsonObject { { actorType, actors.ToJson() } };
+            return client.Post<ProjectRole>(uri.ToString(), request);
         }
     }
 }

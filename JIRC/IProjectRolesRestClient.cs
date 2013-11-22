@@ -46,5 +46,23 @@ namespace JIRC
         /// <returns>A collection of all roles for the project.</returns>
         /// <exception cref="WebServiceException">The project was not found, or the calling user does not have permission to view it.</exception>
         IEnumerable<ProjectRole> GetRoles(Uri projectUri);
+
+        /// <summary>
+        /// Adds a user to a specific role in the project.
+        /// </summary>
+        /// <param name="projectUri">The URI of the project resource.</param>
+        /// <param name="roleId">The ID of the project role.</param>
+        /// <param name="userName">The name of the user to add.</param>
+        /// <returns>Detailed information about the selected role.</returns>
+        ProjectRole AddUserToRole(Uri projectUri, int roleId, string userName);
+
+        /// <summary>
+        /// Adds a group to a specific role in the project.
+        /// </summary>
+        /// <param name="projectUri">The URI of the project resource.</param>
+        /// <param name="roleId">The ID of the project role.</param>
+        /// <param name="groupName">The name of the group to add.</param>
+        /// <returns>Detailed information about the selected role.</returns>
+        ProjectRole AddGroupToRole(Uri projectUri, int roleId, string groupName);
     }
 }

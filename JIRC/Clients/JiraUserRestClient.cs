@@ -9,6 +9,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using JIRC.Domain;
 using JIRC.Extensions;
@@ -29,6 +31,8 @@ namespace JIRC.Clients
         internal const string UserAssignableSearchUriPrefix = "/user/assignable/search";
 
         private const string UserUriPrefix = "/user";
+
+        private const string GroupPickerUriPrefix = "groups/picker";
 
         private readonly JsonServiceClient client;
 
@@ -65,6 +69,22 @@ namespace JIRC.Clients
         public User GetUser(Uri userUri)
         {
             return client.Get<User>(userUri.ToString());
+        }
+
+        /// <summary>
+        /// Gets a list of all groups.
+        /// </summary>
+        /// <returns>A list of groups.</returns>
+        public IEnumerable<string> GetGroups()
+        {
+            var qb = new UriBuilder(client.BaseUri.AppendPath(GroupPickerUriPrefix));
+            qb.AppendQuery("maxResults", "500");
+
+            var response = client.Get<JsonObject>(qb.Uri.ToString());
+
+            var groups = response.Get<IEnumerable<JsonObject>>("groups");
+
+            return groups.Select(a => a.Get<string>("name"));
         }
     }
 }
