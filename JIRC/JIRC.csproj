@@ -137,7 +137,6 @@
     <Compile Include="IComponentRestClient.cs" />
     <Compile Include="IIssueRestClient.cs" />
     <Compile Include="IJiraRestClient.cs" />
-    <Compile Include="IJiraRestClientFactory.cs" />
     <Compile Include="IMetadataRestClient.cs" />
     <Compile Include="Internal\Json\CimFieldsInfoMapJsonParser.cs" />
     <Compile Include="Internal\Json\CustomJsonSerializer.cs" />

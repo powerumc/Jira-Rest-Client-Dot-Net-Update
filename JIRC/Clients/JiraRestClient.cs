@@ -22,8 +22,6 @@ namespace JIRC.Clients
     /// </summary>
     public class JiraRestClient : IJiraRestClient
     {
-        private const string LatestRestUri = "/rest/api/latest";
-
         static JiraRestClient()
         {
             JsConfig.DateHandler = JsonDateHandler.ISO8601;
@@ -35,23 +33,8 @@ namespace JIRC.Clients
         /// Initializes a new instance of the REST client for JIRA. This will use Basic Authentication.
         /// </summary>
         /// <param name="serverUri">The base URI for the JIRA instance.</param>
-        /// <param name="user">The username to use to connect with.</param>
-        /// <param name="pass">The password to use to connect with.</param>
-        public JiraRestClient(Uri serverUri, string user, string pass)
-            : this(serverUri, GetClientWithBasicAuth(serverUri, user, pass))
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the REST client for JIRA. This will use Anonymous authentication.
-        /// </summary>
-        /// <param name="serverUri">The base URI for the JIRA instance.</param>
-        public JiraRestClient(Uri serverUri)
-            : this(serverUri, GetAnonymousClient(serverUri))
-        {
-        }
-
-        private JiraRestClient(Uri serverUri, JsonServiceClient client)
+        /// <param name="client">The client to us.</param>
+        internal JiraRestClient(Uri serverUri, JsonServiceClient client)
         {
             ServerUri = serverUri;
 
@@ -115,23 +98,5 @@ namespace JIRC.Clients
         /// Gets the base URI for the JIRA instance.
         /// </summary>
         public Uri ServerUri { get; private set; }
-
-        private static JsonServiceClient GetClientWithBasicAuth(Uri serverUri, string username, string password)
-        {
-            var baseUri = new Uri(serverUri, LatestRestUri);
-
-            return new JsonServiceClient(baseUri.ToString())
-            {
-                UserName = username,
-                Password = password,
-                AlwaysSendBasicAuthHeader = true
-            };
-        }
-
-        private static JsonServiceClient GetAnonymousClient(Uri serverUri)
-        {
-            var baseUri = new Uri(serverUri, LatestRestUri);
-            return new JsonServiceClient(baseUri.ToString());
-        }
     }
 }
