@@ -1,0 +1,45 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="default">
+  <UsingTask TaskName="Microsoft.Build.Tasks.XmlPoke"
+             AssemblyName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+
+  <PropertyGroup>
+    <BaseDir>$(MSBuildProjectDirectory)\..\</BaseDir>
+    <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+    <BuildDir>$(BaseDir)Build\</BuildDir>
+    <PackageDir>$(BaseDir)Release\</PackageDir>
+    <SolutionFile>$(BaseDir)JiraRestClient.sln</SolutionFile>
+    <MSBuildExtensions>$(BaseDir)libmsbuildmsbuild.community.tasks.dll</MSBuildExtensions>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.XmlUpdate" />
+
+  <Target Name="default" DependsOnTargets="Compile; Package" />
+
+  <Target Name="Compile">
+    <MSBuild Projects="$(SolutionFile)" Properties="Configuration=$(Configuration)"  />
+  </Target>
+
+  <Target Name="Package">
+    <!-- First copy the nuspec template files to the package dir --> 
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\JIRC.nuspec" DestinationFiles="$(PackageDir)tempJIRC.nuspec" />
+
+    <!-- Get the version number of the main assembly to insert into the nuspec files -->
+    <GetAssemblyIdentity AssemblyFiles="$(BaseDir)JIRC\bin\Release\JiraRestClientDotNet.dll">
+      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+    </GetAssemblyIdentity>
+
+    <Message Text="%(AsmInfo.Version)"/>
+
+    <PropertyGroup>
+      <Pattern>(\d+)\.(\d+)\.(\d+)</Pattern>
+      <In>%(AsmInfo.Version)</In>
+      <Out>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)))</Out>
+    </PropertyGroup>
+
+    <!-- insert the version number into the nuspec files -->
+    <XmlPoke Namespaces="&lt;Namespace Prefix='x' Uri='http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd' /&gt;" XmlInputPath="$(PackageDir)tempJIRC.nuspec" Query="/x:package/x:metadata/x:version" Value="$(Out)" />
+
+    <Exec WorkingDirectory="$(PackageDir)" 
+          Command="$(BaseDir).nuget\nuget.exe pack $(PackageDir)tempJIRC.nuspec" />
+  </Target>
+</Project>

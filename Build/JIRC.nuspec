@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>JircDotNet</id>
+        <version>1.0</version>
+        <title>JIRA Rest Client for .NET</title>
+        <authors>dpbevin</authors>
+        <owners>David Bevin</owners>
+        <licenseUrl>https://bitbucket.org/dpbevin/jira-rest-client-dot-net/wiki/Licence</licenseUrl>
+        <projectUrl>https://bitbucket.org/dpbevin/jira-rest-client-dot-net</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A .NET client for Atlassian JIRA that uses the REST interface.
+
+Based around Atlassian's Java client implementation and makes use of awesome ServiceStack libraries.</description>
+        <copyright>Copyright (c) 2013, David Bevin</copyright>
+        <language>es-US</language>
+    </metadata>
+    <files>
+        <file src="..\JIRC\bin\Release\JiraRestClientDotNet.xml" target="lib\net40\JiraRestClientDotNet.xml" />
+        <file src="..\JIRC\bin\Release\JiraRestClientDotNet.dll" target="lib\net40\JiraRestClientDotNet.dll" />
+        <file src="..\JIRC\bin\Release\ServiceStack.Common.dll" target="lib\net40\ServiceStack.Common.dll" />
+        <file src="..\JIRC\bin\Release\ServiceStack.Interfaces.dll" target="lib\net40\ServiceStack.Interfaces.dll" />
+        <file src="..\JIRC\bin\Release\ServiceStack.Text.dll" target="lib\net40\ServiceStack.Text.dll" />
+    </files>
+</package>

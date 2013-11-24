@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIRC", "JIRC\JIRC.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIRC.Internal.Tests", "JIRC.Internal.Tests\JIRC.Internal.Tests.csproj", "{8F3E1DCE-9EC8-4BB8-8C1D-37597605FB47}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{533C9CF6-4D26-4D5E-B827-96CBD8EE9D6C}"
+	ProjectSection(SolutionItems) = preProject
+		Build\build.proj = Build\build.proj
+		Build\JIRC.nuspec = Build\JIRC.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
