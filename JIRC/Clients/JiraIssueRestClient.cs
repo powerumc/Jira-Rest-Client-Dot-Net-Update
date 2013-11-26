@@ -36,6 +36,8 @@ namespace JIRC.Clients
 
         private const string EditMetaUriPostfix = "editmeta";
 
+        private const string AssigneeUriPostfix = "assignee";
+
         private readonly JsonServiceClient client;
 
         private readonly IMetadataRestClient metadataClient;
@@ -277,6 +279,33 @@ namespace JIRC.Clients
             }
 
             return client.Get<IEnumerable<User>>(qb.Uri.ToString());
+        }
+
+        /// <summary>
+        /// Assigns an issue to a user.
+        /// </summary>
+        /// <param name="issue">The issue to make the assignment for.</param>
+        /// <param name="user">The username of the person to assign the issue to.</param>
+        public void AssignTo(Issue issue, string user)
+        {
+            if (issue == null)
+            {
+                throw new ArgumentNullException("issue");
+            }
+
+            var request = new JsonObject { { "name", user } };
+            client.Put<JsonObject>(issue.Self.Append(AssigneeUriPostfix).ToString(), request);
+        }
+
+        /// <summary>
+        /// Assigns an issue to the automatic assignee or removes the assignee entirely.
+        /// </summary>
+        /// <param name="issue">The issue to make the assignment for.</param>
+        /// <param name="assignee">The special assignee type.</param>
+        public void AssignTo(Issue issue, SpecialAssignee assignee)
+        {
+            var user = assignee == SpecialAssignee.Automatic ? "-1" : null;
+            AssignTo(issue, user);
         }
 
         /// <summary>

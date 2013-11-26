@@ -140,6 +140,20 @@ namespace JIRC
         IEnumerable<User> GetAssignableUsers(string issueKey, int? startAt, int? maxResults);
 
         /// <summary>
+        /// Assigns an issue to a user.
+        /// </summary>
+        /// <param name="issue">The issue to make the assignment for.</param>
+        /// <param name="user">The username of the person to assign the issue to.</param>
+        void AssignTo(Issue issue, string user);
+
+        /// <summary>
+        /// Assigns an issue to the automatic assignee or removes the assignee entirely.
+        /// </summary>
+        /// <param name="issue">The issue to make the assignment for.</param>
+        /// <param name="assignee">The special assignee type.</param>
+        void AssignTo(Issue issue, SpecialAssignee assignee);
+
+        /// <summary>
         /// Casts your vote on the selected issue. Casting a vote on already votes issue by the caller, causes the exception.
         /// </summary>
         /// <param name="votesUri">URI of the voters resource for the selected issue. Usually obtained by getting the <see cref="BasicVotes.Self"/> property on the <see cref="Issue"/>.</param>
