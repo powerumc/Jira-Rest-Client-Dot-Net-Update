@@ -28,9 +28,9 @@ namespace JIRC.Clients
         /// <summary>
         /// The URI resource used when searching for users.
         /// </summary>
-        internal const string UserAssignableSearchUriPrefix = "/user/assignable/search";
+        internal const string UserAssignableSearchUriPrefix = "user/assignable/search";
 
-        private const string UserUriPrefix = "/user";
+        private const string UserUriPrefix = "user";
 
         private const string GroupPickerUriPrefix = "groups/picker";
 
