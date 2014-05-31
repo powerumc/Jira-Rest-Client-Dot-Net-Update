@@ -33,7 +33,7 @@ namespace JIRC
         /// <returns>A new client for accessing JIRA.</returns>
         public static IJiraRestClient CreateWithBasicHttpAuth(Uri serverUri, string username, string password)
         {
-            var client = new JsonServiceClient(new Uri(serverUri, LatestRestUri).ToString())
+            var client = new JsonServiceClient(GetFullBaseUri(serverUri))
             {
                 UserName = username,
                 Password = password,
@@ -50,7 +50,7 @@ namespace JIRC
         /// <returns>A new client for accessing JIRA.</returns>
         public static IJiraRestClient CreateWithAnonymous(Uri serverUri)
         {
-            return new JiraRestClient(serverUri, new JsonServiceClient(new Uri(serverUri, LatestRestUri).ToString()));
+            return new JiraRestClient(serverUri, new JsonServiceClient(GetFullBaseUri(serverUri)));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace JIRC
         /// <returns>A new client for accessing JIRA.</returns>
         public static IJiraRestClient CreateWithSessionAuth(Uri serverUri, string username, string password)
         {
-            var client = new JsonServiceClient(new Uri(serverUri, LatestRestUri).ToString()) { UserName = username, Password = password };
+            var client = new JsonServiceClient(GetFullBaseUri(serverUri)) { UserName = username, Password = password };
 
             client.OnAuthenticationRequired = request =>
                 {
@@ -71,6 +71,24 @@ namespace JIRC
                 };
 
             return new JiraRestClient(serverUri, client);
+        }
+
+        private static string GetFullBaseUri(Uri serverUri)
+        {
+            if (serverUri == null)
+            {
+                throw new ArgumentNullException("serverUri");
+            }
+
+            var path = LatestRestUri;
+
+            if (serverUri.LocalPath.Length > 1)
+            {
+                // LocalPath is '/' usually
+                path = serverUri.LocalPath + LatestRestUri;
+            }
+
+            return new Uri(serverUri, path).ToString();
         }
     }
 }
