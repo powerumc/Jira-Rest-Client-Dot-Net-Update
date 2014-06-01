@@ -9,9 +9,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Net;
 
 using JIRC.Internal.Json;
 
+using ServiceStack.Logging;
+using ServiceStack.Logging.Support.Logging;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.Text;
 
@@ -26,7 +29,13 @@ namespace JIRC.Clients
         {
             JsConfig.DateHandler = JsonDateHandler.ISO8601;
 
+#if DEBUG
+            Debug = true;
+#endif
+
             CustomJsonSerializer.RegisterAllClasses();
+            ServiceClientBase.HttpWebRequestFilter = HttpWebRequestFilter;
+            ServiceClientBase.HttpWebResponseFilter = HttpWebResponseFilter;
         }
 
         /// <summary>
@@ -47,6 +56,27 @@ namespace JIRC.Clients
             VersionClient = new JiraVersionRestClient(client);
             ProjectRolesClient = new JiraProjectRolesRestClient(client);
             IssueClient = new JiraIssueRestClient(client, MetadataClient, SessionClient);
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether debug mode is enabled.
+        /// </summary>
+        public static bool Debug { get; set; }
+
+        /// <summary>
+        /// Gets or sets the log factory to use.
+        /// </summary>
+        public static ILogFactory LogFactory
+        {
+            get
+            {
+                return LogManager.LogFactory;
+            }
+
+            set
+            {
+                LogManager.LogFactory = value;
+            }
         }
 
         /// <summary>
@@ -98,5 +128,32 @@ namespace JIRC.Clients
         /// Gets the base URI for the JIRA instance.
         /// </summary>
         public Uri ServerUri { get; private set; }
+
+        /// <summary>
+        /// Enables debugging to the console.
+        /// </summary>
+        public static void EnableConsoleLogger()
+        {
+            Debug = true;
+            LogFactory = new ConsoleLogFactory();
+        }
+
+        private static void HttpWebRequestFilter(HttpWebRequest httpWebRequest)
+        {
+            if (Debug)
+            {
+                var logger = LogManager.GetLogger(typeof(JiraRestClient));
+                logger.Debug(string.Format("Sending {0} to URL: {1}", httpWebRequest.Method, httpWebRequest.Address));
+            }
+        }
+
+        private static void HttpWebResponseFilter(HttpWebResponse httpWebResponse)
+        {
+            if (Debug)
+            {
+                var logger = LogManager.GetLogger(typeof(JiraRestClient));
+                logger.Debug(string.Format("Received Status Code: {0} ({1})", httpWebResponse.StatusCode, (int)httpWebResponse.StatusCode));
+            }
+        }
     }
 }
