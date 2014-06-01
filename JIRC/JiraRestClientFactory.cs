@@ -67,7 +67,7 @@ namespace JIRC
             client.OnAuthenticationRequired = request =>
                 {
                     var obj = new JsonObject { { "username", username }, { "password", password } };
-                    client.Post<JsonObject>(new Uri(serverUri, "/rest/auth/1/session").ToString(), obj);
+                    client.Post<JsonObject>(BuildUrl(serverUri, "/rest/auth/1/session"), obj);
                 };
 
             return new JiraRestClient(serverUri, client);
@@ -75,17 +75,20 @@ namespace JIRC
 
         private static string GetFullBaseUri(Uri serverUri)
         {
+            return BuildUrl(serverUri, LatestRestUri);
+        }
+
+        private static string BuildUrl(Uri serverUri, string path)
+        {
             if (serverUri == null)
             {
                 throw new ArgumentNullException("serverUri");
             }
 
-            var path = LatestRestUri;
-
             if (serverUri.LocalPath.Length > 1)
             {
                 // LocalPath is '/' usually
-                path = serverUri.LocalPath + LatestRestUri;
+                path = serverUri.LocalPath + path;
             }
 
             return new Uri(serverUri, path).ToString();
