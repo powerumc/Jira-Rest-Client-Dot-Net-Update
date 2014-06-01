@@ -85,7 +85,7 @@ namespace JIRC.Clients
                 qb.AppendQuery("startAt", startAt.ToString());
             }
 
-            if (fields != null)
+            if (fields != null && fields.Length > 0)
             {
                 qb.AppendQuery("fields", fields.Join(","));
             }
