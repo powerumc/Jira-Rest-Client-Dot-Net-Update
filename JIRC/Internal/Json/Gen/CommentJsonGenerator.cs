@@ -39,7 +39,7 @@ namespace JIRC.Internal.Json.Gen
 
                     visibilityJson.Add("type", commentVisibilityType);
                     visibilityJson.Add("value", comment.Visibility.Value);
-                    json.Add("visibility", visibilityJson.ToString());
+                    json.Add("visibility", visibilityJson.ToJson());
                 }
                 else
                 {

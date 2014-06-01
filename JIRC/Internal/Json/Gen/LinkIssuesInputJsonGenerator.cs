@@ -27,9 +27,9 @@ namespace JIRC.Internal.Json.Gen
                 var jsonInward = new JsonObject { { "key", linkIssuesInput.FromIssueKey } };
                 var jsonOutward = new JsonObject { { "key", linkIssuesInput.ToIssueKey } };
 
-                json.Add("type", jsonType.SerializeToString());
-                json.Add("inwardIssue", jsonInward.SerializeToString());
-                json.Add("outwardIssue", jsonOutward.SerializeToString());
+                json.Add("type", jsonType.ToJson());
+                json.Add("inwardIssue", jsonInward.ToJson());
+                json.Add("outwardIssue", jsonOutward.ToJson());
             }
             else
             {
@@ -40,7 +40,7 @@ namespace JIRC.Internal.Json.Gen
 
             if (linkIssuesInput.Comment != null)
             {
-                json.Add("comment", CommentJsonGenerator.Generate(linkIssuesInput.Comment, serverInfo).SerializeToString());
+                json.Add("comment", CommentJsonGenerator.Generate(linkIssuesInput.Comment, serverInfo).ToJson());
             }
 
             return json;

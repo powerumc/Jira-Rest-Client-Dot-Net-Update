@@ -29,12 +29,12 @@ namespace JIRC.Internal.Json.Gen
 
             if (worklogInput.Visibility != null)
             {
-                json.Add("visibility", VisibilityJsonGenerator.Generate(worklogInput.Visibility).ToString());
+                json.Add("visibility", VisibilityJsonGenerator.Generate(worklogInput.Visibility).ToJson());
             }
 
             if (worklogInput.Author != null)
             {
-                json.Add("author", BasicUserJsonGenerator.Generate(worklogInput.Author).ToString());
+                json.Add("author", BasicUserJsonGenerator.Generate(worklogInput.Author).ToJson());
             }
 
             if (worklogInput.UpdateAuthor != null)
