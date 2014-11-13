@@ -55,7 +55,7 @@ namespace JIRC.Domain
             { IssueFieldId.Components, "components" },
             { IssueFieldId.Created, "created" },
             { IssueFieldId.Description, "description" },
-            { IssueFieldId.DueDate, "duedata" },
+            { IssueFieldId.DueDate, "duedate" },
             { IssueFieldId.FixVersions, "fixVersions" },
             { IssueFieldId.IssueType, "issuetype" },
             { IssueFieldId.Labels, "labels" },
